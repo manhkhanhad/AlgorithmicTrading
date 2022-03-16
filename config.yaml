@@ -1,0 +1,23 @@
+DATA_PATH: "Data/VnStock_preprocessed.csv"
+
+PERIODS: { 
+            "sideway": ['2014-10-01','2016-03-01'],  #yyyy-mm-dd
+            "uptrend_1": ['2016-03-01','2018-03-01'],
+            "downtrend": ['2018-03-01','2020-03-01'],
+            "uptrend_2": ['2020-03-01','2021-12-31'],
+            "crisis_1": ['2018-10-04','2018-11-16'],
+            "crisis_2": ['2020-03-06','2020-04-01'],
+          }
+
+BEGIN_DAY: '2009-12-22'
+
+SCENARIOS: ['sideway', 'uptrend_1', 'downtrend', 'uptrend_2', 'crisis_1', 'crisis_2']
+
+AGENTS: ['ddpg', 'ppo', 'td3', 'sac']
+
+ERL_PARAMS: {"learning_rate": 0.0003 ,"batch_size": 2048, "gamma":  0.985,
+            "seed": 312,"net_dimension": 512, "target_step": 100000, "eval_gap": 60,
+            "eval_times": 1, 'learner_gpus': 7}
+
+BREAK_STEP: 100000
+
