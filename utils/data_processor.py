@@ -31,24 +31,24 @@ class DataDowloader:
         self.end_date = config.end_day
         self.stock_list = config.stock_list
         self.data_source = config.data_source
-        self.save_dir = config.save_path
+        self.save_path = config.save_path
         self.minimal = config.minimal
 
     def download(self):
         """
         Download data from internet
         """
-        data = None
+        self.data = None
         for stock in self.stock_list:
-            loader = web.DataLoader(symbols=[i], start=self.start_day, end=self.end_date, minimal=self.minimal, data_source=self.data_source)
+            loader = web.DataLoader(symbols=[stock], start=self.start_day, end=self.end_date, minimal=self.minimal, data_source=self.data_source)
             tmp = loader.download()
             tmp.columns = ['high','low','open','close','adjust','volume']
-            tmp = tmp.assign(tic=i)
+            tmp = tmp.assign(tic=stock)
             tmp['date'] = tmp.index
             tmp = tmp.drop('adjust',axis = 1)
-            data = pd.concat([data,tmp], ignore_index=True)
+            self.data = pd.concat([self.data,tmp], ignore_index=True)
         
-        data.to_csv(self.save_path)
+        self.data.to_csv(self.save_path)
 
     def process(self):
         """
@@ -56,15 +56,32 @@ class DataDowloader:
         """
         print("Processing data")
 
+        #Process missing data
+
+        #get the list of day when the price data of all stocks are available
+        list_tics = list(pd.unique(self.data['tic']))
+        day_list = self.data[self.data.tic == list_tics[0]]['date']
+        for tic_name in list_tics[1:]:
+            day_list = pd.Series(list(set(day_list).intersection(set(self.data[self.data["tic"] == tic_name]['date']))))
+        
+        #fillter the data to only have the day when all stocks have data
+        self.data = pd.merge(self.data, day_list.to_frame('date'), on = 'date')
+
+        self.data.to_csv(self.save_path)
+
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--start_day', type=str, default='2009-12-22')
     parser.add_argument('--end_day', type=str, default='2022-03-01')
-    parser.add_argument('--stock_list', type=str, default=['PVS','VIC','VNM','FPT','PVI','HBC','STB','ACB','PVT','HSG'])
+    parser.add_argument('--stock_list', type=str, default=['AGR', 'BVH', 'CTG', 'DIG', 'DPM', 'DRC', 'DXG', 'EIB', 'FPT',
+       'HAG', 'HAI', 'HBC', 'HSG', 'HT1', 'ITA', 'KBC', 'LGC', 'MSN',
+       'PNJ', 'PVI', 'PVS', 'PVT', 'RIC', 'SAM', 'SBT', 'SSI', 'STB',
+       'TCR', 'TSC', 'TTF', 'VCB', 'VIC', 'VNE', 'VNM'])
     parser.add_argument('--data_source', type=str, default='vnd')
-    parser.add_argument('--save_dir', type=str, default='Data/VN_stock_raw.csv')
+    parser.add_argument('--save_path', type=str, default='Data/VN_stock_raw.csv')
     parser.add_argument('--minimal', type=bool, default=True)
     args = parser.parse_args()
+
 
     dowloader = DataDowloader(args)
     dowloader.download()

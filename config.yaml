@@ -21,8 +21,8 @@ ERL_PARAMS: {"learning_rate": 0.0003 ,"batch_size": 2048, "gamma":  0.985,
 
 BREAK_STEP: 100000
 
-RESULT_FOLDER: './results/ElegantRL/'
+RESULT_FOLDER: './results/debug/'
 
-TRAINED_MODEL_FOLDER: './trained_models/ElegantRL/'
+TRAINED_MODEL_FOLDER: './trained_models/debug/'
 
 TECHNICAL_INDICATORS_LIST: ['macd', 'boll_ub', 'boll_lb', 'rsi_30', 'cci_30', 'dx_30', 'close_30_sma', 'close_60_sma']
