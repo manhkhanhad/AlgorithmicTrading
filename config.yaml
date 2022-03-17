@@ -11,7 +11,7 @@ PERIODS: {
 
 BEGIN_DAY: '2009-12-22'
 
-SCENARIOS: ['sideway', 'uptrend_1', 'downtrend', 'uptrend_2', 'crisis_1', 'crisis_2']
+SCENARIOS: ['sideway', 'uptrend_1', 'downtrend', 'uptrend_2', 'crisis_1'] #, 'crisis_2']
 
 AGENTS: ['ddpg', 'ppo', 'td3', 'sac']
 
@@ -21,3 +21,8 @@ ERL_PARAMS: {"learning_rate": 0.0003 ,"batch_size": 2048, "gamma":  0.985,
 
 BREAK_STEP: 100000
 
+RESULT_FOLDER: './results/ElegantRL/'
+
+TRAINED_MODEL_FOLDER: './trained_models/ElegantRL/'
+
+TECHNICAL_INDICATORS_LIST: ['macd', 'boll_ub', 'boll_lb', 'rsi_30', 'cci_30', 'dx_30', 'close_30_sma', 'close_60_sma']

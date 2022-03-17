@@ -1,4 +1,7 @@
-result/
+results/
 trained_models/
 model/__pycache__/
 utils/__pycache__/
+visualization/__pycache__/
+vnquant/
+vnquant.egg-info/*

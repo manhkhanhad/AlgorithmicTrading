@@ -45,7 +45,7 @@ def train(config):
             model = agent.get_model(agent_name, model_kwargs = config['ERL_PARAMS'])
 
             trained_model = agent.train_model(model=model,
-                                            cwd='./trained_models/ElegantRL/' + scenario + '/' + agent_name,
+                                            cwd=config["TRAINED_MODEL_FOLDER"] + scenario + '/' + agent_name,
                                             total_timesteps=config['BREAK_STEP'])
 
 if __name__ == "__main__":
