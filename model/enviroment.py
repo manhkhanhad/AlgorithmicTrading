@@ -134,5 +134,3 @@ class StockTradingEnv(gym.Env):
             return 1 / (1 + np.exp(-x * np.e)) - 0.5
 
         return sigmoid(ary / thresh) * thresh
-
-        

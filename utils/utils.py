@@ -1,10 +1,16 @@
+from xml.dom.minidom import Document
 import yaml
 import numpy as np
-
+import os
 def read_yaml(config_weight):
     try:
         with open(config_weight) as file:
             config = yaml.load(file, Loader=yaml.FullLoader)
+        config['SCENARIOS'] = list(config['PERIODS'].keys())
+        os.mkdirs(config['TRAINED_MODEL_FOLDER'])
+        with open(os.path.join(config['TRAINED_MODEL_FOLDER'],'config.yaml'), 'w') as file:
+            yaml.dump(config, file)
+
     except ValueError:
         print("No config file!")
     return config
