@@ -1,17 +1,10 @@
 import yaml
 import numpy as np
-import os
 
 def read_yaml(config_weight):
     try:
         with open(config_weight) as file:
             config = yaml.load(file, Loader=yaml.FullLoader)
-        os.makedirs(config['TRAINED_MODEL_FOLDER'], exist_ok=True)
-        config['SCENARIOS'] = list(config['PERIODS'].keys())
-        print(config['SCENARIOS'])
-        with open(os.path.join(config['TRAINED_MODEL_FOLDER'], 'config.yaml'), 'w') as file:
-            documents = yaml.dump(config, file)
-            
     except ValueError:
         print("No config file!")
     return config
