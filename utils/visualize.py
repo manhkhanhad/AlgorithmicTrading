@@ -67,3 +67,7 @@ def visualize(result_folder, list_agent, with_VNI = False):
     fig.write_image(os.path.join(result_folder,"result.png"))
 
     return df
+
+def visualize_trading_behavior():
+    #To be implement
+    pass

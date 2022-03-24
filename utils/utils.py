@@ -7,7 +7,7 @@ def read_yaml(config_weight):
         with open(config_weight) as file:
             config = yaml.load(file, Loader=yaml.FullLoader)
         config['SCENARIOS'] = list(config['PERIODS'].keys())
-        os.mkdirs(config['TRAINED_MODEL_FOLDER'])
+        os.makedirs(config['TRAINED_MODEL_FOLDER'],exist_ok=True)
         with open(os.path.join(config['TRAINED_MODEL_FOLDER'],'config.yaml'), 'w') as file:
             yaml.dump(config, file)
 

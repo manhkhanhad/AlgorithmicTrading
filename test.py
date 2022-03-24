@@ -6,7 +6,8 @@ import os
 from finrl import config
 
 #from finrl.finrl_meta.env_stock_trading.env_stocktrading import StockTradingEnv
-from finrl.drl_agents.elegantrl.models import DRLAgent as DRLAgent_erl
+#from finrl.drl_agents.elegantrl.models import DRLAgent as DRLAgent_erl
+from model.elegantrl import DRLAgent as DRLAgent_erl
 from finrl.finrl_meta.preprocessor.preprocessors import FeatureEngineer, data_split
 from finrl.finrl_meta.data_processor import DataProcessor
 from model.enviroment import StockTradingEnv

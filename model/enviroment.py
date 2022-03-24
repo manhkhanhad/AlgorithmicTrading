@@ -78,7 +78,7 @@ class StockTradingEnv(gym.Env):
 
     def step(self, actions):
         actions = (actions * self.max_stock).astype(int)
-
+        print(self.stocks)
         self.day += 1
         price = self.price_ary[self.day]
         self.stocks_cd += 1

@@ -1,0 +1,1491 @@
+Testing scenario:  crisis_1
+Successfully transformed into array
+Test Finished!
+episode_return 0.9885248184395791
+==============Get Backtest Results of ddpg===========
+Annual return          -0.339987
+Cumulative returns     -0.011475
+Annual volatility       0.051418
+Sharpe ratio           -9.396999
+Calmar ratio          -29.238036
+Stability               0.836672
+Max drawdown           -0.011628
+Omega ratio             0.176420
+Sortino ratio          -8.952328
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              0.301041
+Daily value at risk    -0.008395
+dtype: float64
+Test Finished!
+episode_return 0.9921486840181515
+==============Get Backtest Results of ppo===========
+Annual return          -0.247055
+Cumulative returns     -0.007851
+Annual volatility       0.050997
+Sharpe ratio           -6.466200
+Calmar ratio          -30.584140
+Stability               0.687073
+Max drawdown           -0.008078
+Omega ratio             0.336552
+Sortino ratio          -7.342134
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              0.615700
+Daily value at risk    -0.007734
+dtype: float64
+Test Finished!
+episode_return 0.9873138728692492
+==============Get Backtest Results of td3===========
+Annual return          -0.368478
+Cumulative returns     -0.012686
+Annual volatility       0.085601
+Sharpe ratio           -6.221885
+Calmar ratio          -25.263162
+Stability               0.670443
+Max drawdown           -0.014586
+Omega ratio             0.347661
+Sortino ratio          -7.142384
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              0.609299
+Daily value at risk    -0.012898
+dtype: float64
+Test Finished!
+episode_return 0.9919634055546019
+==============Get Backtest Results of sac===========
+Annual return          -0.252100
+Cumulative returns     -0.008037
+Annual volatility       0.046476
+Sharpe ratio           -7.267714
+Calmar ratio          -30.551766
+Stability               0.737682
+Max drawdown           -0.008252
+Omega ratio             0.285806
+Sortino ratio          -7.870139
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              0.528777
+Daily value at risk    -0.007196
+dtype: float64
+7
+Testing scenario:  crisis_2
+Successfully transformed into array
+Test Finished!
+episode_return 1.0143258107680795
+==============Get Backtest Results of ddpg===========
+Annual return            0.431108
+Cumulative returns       0.014326
+Annual volatility        0.029798
+Sharpe ratio            13.389791
+Calmar ratio           361.636463
+Stability                0.937999
+Max drawdown            -0.001192
+Omega ratio             12.380102
+Sortino ratio           63.170452
+Skew                          NaN
+Kurtosis                      NaN
+Tail ratio               6.045465
+Daily value at risk     -0.002171
+dtype: float64
+Test Finished!
+episode_return 1.0085901816917826
+==============Get Backtest Results of ppo===========
+Annual return            0.240542
+Cumulative returns       0.008590
+Annual volatility        0.020404
+Sharpe ratio            11.752716
+Calmar ratio           166.543269
+Stability                0.898677
+Max drawdown            -0.001444
+Omega ratio              6.753546
+Sortino ratio           42.097549
+Skew                          NaN
+Kurtosis                      NaN
+Tail ratio               3.260266
+Daily value at risk     -0.001619
+dtype: float64
+Test Finished!
+episode_return 1.0166837377403497
+==============Get Backtest Results of td3===========
+Annual return            0.517344
+Cumulative returns       0.016684
+Annual volatility        0.040257
+Sharpe ratio            11.536634
+Calmar ratio           241.724226
+Stability                0.906353
+Max drawdown            -0.002140
+Omega ratio              8.208957
+Sortino ratio           40.950572
+Skew                          NaN
+Kurtosis                      NaN
+Tail ratio               4.157882
+Daily value at risk     -0.003229
+dtype: float64
+Test Finished!
+episode_return 1.0113063891639977
+==============Get Backtest Results of sac===========
+Annual return             0.327533
+Cumulative returns        0.011306
+Annual volatility         0.016278
+Sharpe ratio             19.358730
+Calmar ratio           7727.747727
+Stability                 0.951076
+Max drawdown             -0.000042
+Omega ratio             266.528731
+Sortino ratio          1405.045974
+Skew                           NaN
+Kurtosis                       NaN
+Tail ratio              882.585937
+Daily value at risk      -0.000800
+dtype: float64
+10
+Testing scenario:  crisis_3
+Successfully transformed into array
+Test Finished!
+episode_return 0.9543178995704968
+==============Get Backtest Results of ddpg===========
+Annual return         -0.316208
+Cumulative returns    -0.045682
+Annual volatility      0.135951
+Sharpe ratio          -2.821448
+Calmar ratio          -6.921913
+Stability              0.301031
+Max drawdown          -0.045682
+Omega ratio            0.595042
+Sortino ratio         -3.963126
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.713309
+Daily value at risk   -0.018650
+dtype: float64
+Test Finished!
+episode_return 0.9468959280248525
+==============Get Backtest Results of ppo===========
+Annual return         -0.358258
+Cumulative returns    -0.053104
+Annual volatility      0.116194
+Sharpe ratio          -3.885006
+Calmar ratio          -6.746344
+Stability              0.759921
+Max drawdown          -0.053104
+Omega ratio            0.516225
+Sortino ratio         -4.819844
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.953449
+Daily value at risk   -0.016430
+dtype: float64
+Test Finished!
+episode_return 0.93085926162664
+==============Get Backtest Results of td3===========
+Annual return         -0.441456
+Cumulative returns    -0.069141
+Annual volatility      0.174512
+Sharpe ratio          -3.360932
+Calmar ratio          -5.885181
+Stability              0.600296
+Max drawdown          -0.075011
+Omega ratio            0.535868
+Sortino ratio         -4.843858
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.263746
+Daily value at risk   -0.024314
+dtype: float64
+Test Finished!
+episode_return 0.9651642956068722
+==============Get Backtest Results of sac===========
+Annual return         -0.250411
+Cumulative returns    -0.034836
+Annual volatility      0.084925
+Sharpe ratio          -3.463862
+Calmar ratio          -7.002314
+Stability              0.590775
+Max drawdown          -0.035761
+Omega ratio            0.523818
+Sortino ratio         -4.193622
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.913482
+Daily value at risk   -0.011867
+dtype: float64
+31
+Testing scenario:  crisis_4
+Successfully transformed into array
+Test Finished!
+episode_return 0.9410989034544301
+==============Get Backtest Results of ddpg===========
+Annual return         -0.572542
+Cumulative returns    -0.058901
+Annual volatility      0.177694
+Sharpe ratio          -4.971137
+Calmar ratio          -8.910824
+Stability              0.758444
+Max drawdown          -0.064252
+Omega ratio            0.383379
+Sortino ratio         -5.591767
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.419610
+Daily value at risk   -0.025893
+dtype: float64
+Test Finished!
+episode_return 0.9521666563096659
+==============Get Backtest Results of ppo===========
+Annual return         -0.496521
+Cumulative returns    -0.047833
+Annual volatility      0.142524
+Sharpe ratio          -5.023330
+Calmar ratio          -9.955120
+Stability              0.762980
+Max drawdown          -0.049876
+Omega ratio            0.376420
+Sortino ratio         -5.770261
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.377337
+Daily value at risk   -0.020797
+dtype: float64
+Test Finished!
+episode_return 0.946603806841504
+==============Get Backtest Results of td3===========
+Annual return         -0.536174
+Cumulative returns    -0.053396
+Annual volatility      0.181702
+Sharpe ratio          -4.383549
+Calmar ratio          -8.640711
+Stability              0.728115
+Max drawdown          -0.062052
+Omega ratio            0.408514
+Sortino ratio         -5.064045
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.443004
+Daily value at risk   -0.026053
+dtype: float64
+Test Finished!
+episode_return 0.9656637237188415
+==============Get Backtest Results of sac===========
+Annual return         -0.386855
+Cumulative returns    -0.034336
+Annual volatility      0.126788
+Sharpe ratio          -4.020945
+Calmar ratio          -8.037740
+Stability              0.706495
+Max drawdown          -0.048130
+Omega ratio            0.496026
+Sortino ratio         -4.731687
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.609419
+Daily value at risk   -0.017997
+dtype: float64
+18
+Testing scenario:  crisis_5
+Successfully transformed into array
+Test Finished!
+episode_return 0.9885071349904544
+==============Get Backtest Results of ddpg===========
+Annual return          -0.200745
+Cumulative returns     -0.011493
+Annual volatility       0.056605
+Sharpe ratio           -4.260358
+Calmar ratio          -13.291895
+Stability               0.755605
+Max drawdown           -0.015103
+Omega ratio             0.400363
+Sortino ratio          -4.694301
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              0.568914
+Daily value at risk    -0.008088
+dtype: float64
+Test Finished!
+episode_return 0.994698838585179
+==============Get Backtest Results of ppo===========
+Annual return          -0.097904
+Cumulative returns     -0.005301
+Annual volatility       0.015836
+Sharpe ratio           -7.039877
+Calmar ratio          -18.468403
+Stability               0.851856
+Max drawdown           -0.005301
+Omega ratio             0.218671
+Sortino ratio          -7.305981
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              0.352437
+Daily value at risk    -0.002437
+dtype: float64
+Test Finished!
+episode_return 0.9856019655142071
+==============Get Backtest Results of td3===========
+Annual return          -0.245069
+Cumulative returns     -0.014398
+Annual volatility       0.064486
+Sharpe ratio           -4.690330
+Calmar ratio          -11.949714
+Stability               0.866881
+Max drawdown           -0.020508
+Omega ratio             0.395730
+Sortino ratio          -5.394669
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              0.591812
+Daily value at risk    -0.009325
+dtype: float64
+Test Finished!
+episode_return 0.9914026532687819
+==============Get Backtest Results of sac===========
+Annual return          -0.154119
+Cumulative returns     -0.008597
+Annual volatility       0.045826
+Sharpe ratio           -3.934367
+Calmar ratio          -12.700898
+Stability               0.781530
+Max drawdown           -0.012135
+Omega ratio             0.448374
+Sortino ratio          -4.524029
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              0.652923
+Daily value at risk    -0.006489
+dtype: float64
+13
+Testing scenario:  downtrend_1
+Successfully transformed into array
+Test Finished!
+episode_return 0.8217622004087326
+==============Get Backtest Results of ddpg===========
+Annual return         -0.342444
+Cumulative returns    -0.178238
+Annual volatility      0.265894
+Sharpe ratio          -1.455161
+Calmar ratio          -1.031226
+Stability              0.778116
+Max drawdown          -0.332075
+Omega ratio            0.767316
+Sortino ratio         -1.760161
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.659874
+Daily value at risk   -0.035035
+dtype: float64
+Test Finished!
+episode_return 0.8714927182364705
+==============Get Backtest Results of ppo===========
+Annual return         -0.254534
+Cumulative returns    -0.128507
+Annual volatility      0.236459
+Sharpe ratio          -1.134188
+Calmar ratio          -0.949951
+Stability              0.754952
+Max drawdown          -0.267945
+Omega ratio            0.827091
+Sortino ratio         -1.429651
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.598011
+Daily value at risk   -0.030855
+dtype: float64
+Test Finished!
+episode_return 0.8310779034612519
+==============Get Backtest Results of td3===========
+Annual return         -0.326423
+Cumulative returns    -0.168922
+Annual volatility      0.218126
+Sharpe ratio          -1.717024
+Calmar ratio          -1.242859
+Stability              0.818182
+Max drawdown          -0.262639
+Omega ratio            0.744053
+Sortino ratio         -2.179765
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.826439
+Daily value at risk   -0.028968
+dtype: float64
+Test Finished!
+episode_return 0.943143223470752
+==============Get Backtest Results of sac===========
+Annual return         -0.117513
+Cumulative returns    -0.056857
+Annual volatility      0.241473
+Sharpe ratio          -0.400059
+Calmar ratio          -0.614137
+Stability              0.322800
+Max drawdown          -0.191347
+Omega ratio            0.922852
+Sortino ratio         -0.491266
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.761536
+Daily value at risk   -0.030806
+dtype: float64
+118
+Testing scenario:  downtrend_2
+Successfully transformed into array
+Test Finished!
+episode_return 0.938375486602132
+==============Get Backtest Results of ddpg===========
+Annual return         -0.192420
+Cumulative returns    -0.061625
+Annual volatility      0.203406
+Sharpe ratio          -0.962845
+Calmar ratio          -1.240705
+Stability              0.026658
+Max drawdown          -0.155089
+Omega ratio            0.838999
+Sortino ratio         -1.164096
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.728604
+Daily value at risk   -0.026404
+dtype: float64
+Test Finished!
+episode_return 0.8973839714692369
+==============Get Backtest Results of ppo===========
+Annual return         -0.304964
+Cumulative returns    -0.102616
+Annual volatility      0.147098
+Sharpe ratio          -2.431678
+Calmar ratio          -2.406107
+Stability              0.592308
+Max drawdown          -0.126746
+Omega ratio            0.645656
+Sortino ratio         -2.879365
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.684754
+Daily value at risk   -0.019952
+dtype: float64
+Test Finished!
+episode_return 1.0174688878105456
+==============Get Backtest Results of td3===========
+Annual return          0.059915
+Cumulative returns     0.017469
+Annual volatility      0.147578
+Sharpe ratio           0.472725
+Calmar ratio           0.747448
+Stability              0.224585
+Max drawdown          -0.080159
+Omega ratio            1.085871
+Sortino ratio          0.644963
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.067969
+Daily value at risk   -0.018316
+dtype: float64
+Test Finished!
+episode_return 0.9493672536493913
+==============Get Backtest Results of sac===========
+Annual return         -0.160194
+Cumulative returns    -0.050633
+Annual volatility      0.215860
+Sharpe ratio          -0.710840
+Calmar ratio          -1.266712
+Stability              0.139657
+Max drawdown          -0.126464
+Omega ratio            0.872762
+Sortino ratio         -0.835843
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.591478
+Daily value at risk   -0.027805
+dtype: float64
+75
+Testing scenario:  downtrend_3
+Successfully transformed into array
+Test Finished!
+episode_return 0.9416510048508521
+==============Get Backtest Results of ddpg===========
+Annual return         -0.248629
+Cumulative returns    -0.058349
+Annual volatility      0.137865
+Sharpe ratio          -2.044237
+Calmar ratio          -3.656297
+Stability              0.181147
+Max drawdown          -0.068000
+Omega ratio            0.693427
+Sortino ratio         -2.550949
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.764879
+Daily value at risk   -0.018488
+dtype: float64
+Test Finished!
+episode_return 0.8952280756339386
+==============Get Backtest Results of ppo===========
+Annual return         -0.409176
+Cumulative returns    -0.104772
+Annual volatility      0.144488
+Sharpe ratio          -3.636906
+Calmar ratio          -3.850339
+Stability              0.772679
+Max drawdown          -0.106270
+Omega ratio            0.499320
+Sortino ratio         -4.221091
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.970909
+Daily value at risk   -0.020289
+dtype: float64
+Test Finished!
+episode_return 0.9218838262174432
+==============Get Backtest Results of td3===========
+Annual return         -0.320726
+Cumulative returns    -0.078116
+Annual volatility      0.134893
+Sharpe ratio          -2.853058
+Calmar ratio          -4.002230
+Stability              0.741580
+Max drawdown          -0.080137
+Omega ratio            0.573605
+Sortino ratio         -3.240727
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.674894
+Daily value at risk   -0.018522
+dtype: float64
+Test Finished!
+episode_return 0.9364553809157672
+==============Get Backtest Results of sac===========
+Annual return         -0.268138
+Cumulative returns    -0.063545
+Annual volatility      0.138816
+Sharpe ratio          -2.222096
+Calmar ratio          -4.045520
+Stability              0.566180
+Max drawdown          -0.066280
+Omega ratio            0.666593
+Sortino ratio         -2.718488
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.756943
+Daily value at risk   -0.018713
+dtype: float64
+53
+Testing scenario:  downtrend_4
+Successfully transformed into array
+Test Finished!
+episode_return 0.850349918082974
+==============Get Backtest Results of ddpg===========
+Annual return         -0.721014
+Cumulative returns    -0.149650
+Annual volatility      0.292885
+Sharpe ratio          -4.343021
+Calmar ratio          -4.818002
+Stability              0.802902
+Max drawdown          -0.149650
+Omega ratio            0.410685
+Sortino ratio         -4.656868
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.445118
+Daily value at risk   -0.041948
+dtype: float64
+Test Finished!
+episode_return 0.9258155886285752
+==============Get Backtest Results of ppo===========
+Annual return         -0.455020
+Cumulative returns    -0.074184
+Annual volatility      0.121605
+Sharpe ratio          -5.086893
+Calmar ratio          -5.971252
+Stability              0.723294
+Max drawdown          -0.076202
+Omega ratio            0.338929
+Sortino ratio         -5.269461
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.313699
+Daily value at risk   -0.017776
+dtype: float64
+Test Finished!
+episode_return 0.8202903133073899
+==============Get Backtest Results of td3===========
+Annual return         -0.789867
+Cumulative returns    -0.179710
+Annual volatility      0.268611
+Sharpe ratio          -5.842753
+Calmar ratio          -4.301730
+Stability              0.591331
+Max drawdown          -0.183616
+Omega ratio            0.252490
+Sortino ratio         -5.822789
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.319925
+Daily value at risk   -0.040070
+dtype: float64
+Test Finished!
+episode_return 0.8749213559993372
+==============Get Backtest Results of sac===========
+Annual return         -0.650855
+Cumulative returns    -0.125079
+Annual volatility      0.181583
+Sharpe ratio          -5.879972
+Calmar ratio          -5.203565
+Stability              0.818797
+Max drawdown          -0.125079
+Omega ratio            0.285460
+Sortino ratio         -5.995544
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.447802
+Daily value at risk   -0.027114
+dtype: float64
+32
+Testing scenario:  downtrend_5
+Successfully transformed into array
+Test Finished!
+episode_return 0.7864571830924543
+==============Get Backtest Results of ddpg===========
+Annual return         -0.796689
+Cumulative returns    -0.213543
+Annual volatility      0.247888
+Sharpe ratio          -6.454797
+Calmar ratio          -3.624102
+Stability              0.677529
+Max drawdown          -0.219831
+Omega ratio            0.196256
+Sortino ratio         -6.139041
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.150496
+Daily value at risk   -0.037580
+dtype: float64
+Test Finished!
+episode_return 0.8531504719332089
+==============Get Backtest Results of ppo===========
+Annual return         -0.651188
+Cumulative returns    -0.146850
+Annual volatility      0.178746
+Sharpe ratio          -5.949953
+Calmar ratio          -4.272141
+Stability              0.618660
+Max drawdown          -0.152427
+Omega ratio            0.229015
+Sortino ratio         -5.762724
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.204023
+Daily value at risk   -0.026740
+dtype: float64
+Test Finished!
+episode_return 0.7583274338758391
+==============Get Backtest Results of td3===========
+Annual return         -0.840316
+Cumulative returns    -0.241673
+Annual volatility      0.294914
+Sharpe ratio          -6.216676
+Calmar ratio          -3.401577
+Stability              0.652289
+Max drawdown          -0.247037
+Omega ratio            0.211495
+Sortino ratio         -6.009124
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.205775
+Daily value at risk   -0.044431
+dtype: float64
+Test Finished!
+episode_return 0.7825107782251203
+==============Get Backtest Results of sac===========
+Annual return         -0.803360
+Cumulative returns    -0.217489
+Annual volatility      0.239292
+Sharpe ratio          -6.838059
+Calmar ratio          -3.670297
+Stability              0.671078
+Max drawdown          -0.218881
+Omega ratio            0.172552
+Sortino ratio         -6.458889
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.162593
+Daily value at risk   -0.036641
+dtype: float64
+38
+Testing scenario:  sideway_1
+Successfully transformed into array
+Test Finished!
+episode_return 1.3640726381165047
+==============Get Backtest Results of ddpg===========
+Annual return          0.124656
+Cumulative returns     0.364073
+Annual volatility      0.225018
+Sharpe ratio           0.636345
+Calmar ratio           0.316045
+Stability              0.273216
+Max drawdown          -0.394424
+Omega ratio            1.126455
+Sortino ratio          0.840084
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.845744
+Daily value at risk   -0.027781
+dtype: float64
+Test Finished!
+episode_return 1.494558450531621
+==============Get Backtest Results of ppo===========
+Annual return          0.164212
+Cumulative returns     0.494558
+Annual volatility      0.209938
+Sharpe ratio           0.831254
+Calmar ratio           0.506505
+Stability              0.565850
+Max drawdown          -0.324205
+Omega ratio            1.167360
+Sortino ratio          1.108922
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.873551
+Daily value at risk   -0.025757
+dtype: float64
+Test Finished!
+episode_return 1.4158306042362445
+==============Get Backtest Results of td3===========
+Annual return          0.140616
+Cumulative returns     0.415831
+Annual volatility      0.216953
+Sharpe ratio           0.716694
+Calmar ratio           0.342782
+Stability              0.342577
+Max drawdown          -0.410219
+Omega ratio            1.138452
+Sortino ratio          0.952992
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.861367
+Daily value at risk   -0.026716
+dtype: float64
+Test Finished!
+episode_return 1.3007332590298935
+==============Get Backtest Results of sac===========
+Annual return          0.104603
+Cumulative returns     0.300733
+Annual volatility      0.223558
+Sharpe ratio           0.558217
+Calmar ratio           0.249041
+Stability              0.240348
+Max drawdown          -0.420025
+Omega ratio            1.108762
+Sortino ratio          0.743539
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.796515
+Daily value at risk   -0.027670
+dtype: float64
+666
+Testing scenario:  sideway_2
+Successfully transformed into array
+Test Finished!
+episode_return 0.8948296740270404
+==============Get Backtest Results of ddpg===========
+Annual return         -0.286364
+Cumulative returns    -0.105170
+Annual volatility      0.117115
+Sharpe ratio          -2.855895
+Calmar ratio          -1.844967
+Stability              0.871961
+Max drawdown          -0.155214
+Omega ratio            0.606864
+Sortino ratio         -3.391425
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.593067
+Daily value at risk   -0.016082
+dtype: float64
+Test Finished!
+episode_return 0.9574700729807889
+==============Get Backtest Results of ppo===========
+Annual return         -0.123618
+Cumulative returns    -0.042530
+Annual volatility      0.116250
+Sharpe ratio          -1.091046
+Calmar ratio          -1.339305
+Stability              0.643377
+Max drawdown          -0.092300
+Omega ratio            0.818592
+Sortino ratio         -1.412012
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.046077
+Daily value at risk   -0.015149
+dtype: float64
+Test Finished!
+episode_return 0.8886443506156141
+==============Get Backtest Results of td3===========
+Annual return         -0.301236
+Cumulative returns    -0.111356
+Annual volatility      0.101346
+Sharpe ratio          -3.527124
+Calmar ratio          -2.271848
+Stability              0.939867
+Max drawdown          -0.132595
+Omega ratio            0.556034
+Sortino ratio         -4.036738
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.557180
+Daily value at risk   -0.014187
+dtype: float64
+Test Finished!
+episode_return 0.868717095879582
+==============Get Backtest Results of sac===========
+Annual return         -0.347732
+Cumulative returns    -0.131283
+Annual volatility      0.141837
+Sharpe ratio          -2.976415
+Calmar ratio          -2.027963
+Stability              0.886078
+Max drawdown          -0.171469
+Omega ratio            0.586406
+Sortino ratio         -3.525332
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.468089
+Daily value at risk   -0.019545
+dtype: float64
+83
+Testing scenario:  sideway_3
+Successfully transformed into array
+Test Finished!
+episode_return 1.0166751360468214
+==============Get Backtest Results of ddpg===========
+Annual return          0.088772
+Cumulative returns     0.016675
+Annual volatility      0.100059
+Sharpe ratio           0.916968
+Calmar ratio           1.846776
+Stability              0.488701
+Max drawdown          -0.048069
+Omega ratio            1.175576
+Sortino ratio          1.259542
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.062154
+Daily value at risk   -0.012242
+dtype: float64
+Test Finished!
+episode_return 1.004211537172221
+==============Get Backtest Results of ppo===========
+Annual return          0.021849
+Cumulative returns     0.004212
+Annual volatility      0.098108
+Sharpe ratio           0.273098
+Calmar ratio           0.564121
+Stability              0.404262
+Max drawdown          -0.038731
+Omega ratio            1.056999
+Sortino ratio          0.375352
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.286704
+Daily value at risk   -0.012254
+dtype: float64
+Test Finished!
+episode_return 1.036961477175419
+==============Get Backtest Results of td3===========
+Annual return          0.205216
+Cumulative returns     0.036961
+Annual volatility      0.121432
+Sharpe ratio           1.629305
+Calmar ratio           5.578237
+Stability              0.445132
+Max drawdown          -0.036789
+Omega ratio            1.402421
+Sortino ratio          2.419491
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.060072
+Daily value at risk   -0.014514
+dtype: float64
+Test Finished!
+episode_return 0.9703233419901012
+==============Get Backtest Results of sac===========
+Annual return         -0.143528
+Cumulative returns    -0.029677
+Annual volatility      0.086498
+Sharpe ratio          -1.785533
+Calmar ratio          -3.530131
+Stability              0.358348
+Max drawdown          -0.040658
+Omega ratio            0.723165
+Sortino ratio         -2.333511
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.766606
+Daily value at risk   -0.011511
+dtype: float64
+49
+Testing scenario:  sideway_4
+Successfully transformed into array
+Test Finished!
+episode_return 0.9787096676173751
+==============Get Backtest Results of ddpg===========
+Annual return         -0.106833
+Cumulative returns    -0.021290
+Annual volatility      0.123366
+Sharpe ratio          -0.874607
+Calmar ratio          -1.705360
+Stability              0.000457
+Max drawdown          -0.062645
+Omega ratio            0.863805
+Sortino ratio         -1.174874
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.959803
+Daily value at risk   -0.015971
+dtype: float64
+Test Finished!
+episode_return 0.9708286510617122
+==============Get Backtest Results of ppo===========
+Annual return         -0.143951
+Cumulative returns    -0.029171
+Annual volatility      0.068635
+Sharpe ratio          -2.278391
+Calmar ratio          -3.733182
+Stability              0.718500
+Max drawdown          -0.038560
+Omega ratio            0.665914
+Sortino ratio         -2.845102
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.788275
+Daily value at risk   -0.009268
+dtype: float64
+Test Finished!
+episode_return 0.9613976797416258
+==============Get Backtest Results of td3===========
+Annual return         -0.186718
+Cumulative returns    -0.038602
+Annual volatility      0.099720
+Sharpe ratio          -2.066853
+Calmar ratio          -2.965640
+Stability              0.242890
+Max drawdown          -0.062960
+Omega ratio            0.689243
+Sortino ratio         -2.573699
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.089651
+Daily value at risk   -0.013381
+dtype: float64
+Test Finished!
+episode_return 0.9511233312049258
+==============Get Backtest Results of sac===========
+Annual return         -0.231324
+Cumulative returns    -0.048877
+Annual volatility      0.104062
+Sharpe ratio          -2.529461
+Calmar ratio          -3.754236
+Stability              0.502774
+Max drawdown          -0.061617
+Omega ratio            0.625043
+Sortino ratio         -3.080733
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.790571
+Daily value at risk   -0.014155
+dtype: float64
+48
+Testing scenario:  sideway_5
+Successfully transformed into array
+Test Finished!
+episode_return 1.0145610030644656
+==============Get Backtest Results of ddpg===========
+Annual return          0.042266
+Cumulative returns     0.014561
+Annual volatility      0.098766
+Sharpe ratio           0.472699
+Calmar ratio           1.232446
+Stability              0.343189
+Max drawdown          -0.034294
+Omega ratio            1.083748
+Sortino ratio          0.732527
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.168367
+Daily value at risk   -0.012258
+dtype: float64
+Test Finished!
+episode_return 1.0913720908155984
+==============Get Backtest Results of ppo===========
+Annual return          0.284519
+Cumulative returns     0.091372
+Annual volatility      0.151082
+Sharpe ratio           1.751715
+Calmar ratio           2.813671
+Stability              0.574185
+Max drawdown          -0.101120
+Omega ratio            1.383600
+Sortino ratio          2.769155
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.389851
+Daily value at risk   -0.017984
+dtype: float64
+Test Finished!
+episode_return 1.1331095507834577
+==============Get Backtest Results of td3===========
+Annual return          0.430260
+Cumulative returns     0.133110
+Annual volatility      0.155535
+Sharpe ratio           2.405361
+Calmar ratio           5.863153
+Stability              0.654175
+Max drawdown          -0.073384
+Omega ratio            1.538763
+Sortino ratio          4.326934
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.549535
+Daily value at risk   -0.018111
+dtype: float64
+Test Finished!
+episode_return 1.0468709879682052
+==============Get Backtest Results of sac===========
+Annual return          0.140163
+Cumulative returns     0.046871
+Annual volatility      0.144837
+Sharpe ratio           0.987861
+Calmar ratio           1.406054
+Stability              0.079461
+Max drawdown          -0.099685
+Omega ratio            1.188491
+Sortino ratio          1.512180
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.493579
+Daily value at risk   -0.017680
+dtype: float64
+88
+Testing scenario:  uptrend_1
+Successfully transformed into array
+Test Finished!
+episode_return 1.2751484016224959
+==============Get Backtest Results of ddpg===========
+Annual return           0.687958
+Cumulative returns      0.275148
+Annual volatility       0.129797
+Sharpe ratio            4.136302
+Calmar ratio           29.298914
+Stability               0.717137
+Max drawdown           -0.023481
+Omega ratio             2.151852
+Sortino ratio           8.269725
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              1.761121
+Daily value at risk    -0.014222
+dtype: float64
+Test Finished!
+episode_return 1.2265986537724398
+==============Get Backtest Results of ppo===========
+Annual return           0.552571
+Cumulative returns      0.226599
+Annual volatility       0.115087
+Sharpe ratio            3.915419
+Calmar ratio           17.961933
+Stability               0.770020
+Max drawdown           -0.030763
+Omega ratio             2.019521
+Sortino ratio           8.164129
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              1.824579
+Daily value at risk    -0.012711
+dtype: float64
+Test Finished!
+episode_return 1.2243502495715979
+==============Get Backtest Results of td3===========
+Annual return           0.546448
+Cumulative returns      0.224350
+Annual volatility       0.115549
+Sharpe ratio            3.865726
+Calmar ratio           15.303170
+Stability               0.825061
+Max drawdown           -0.035708
+Omega ratio             1.955604
+Sortino ratio           7.688935
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              1.670961
+Daily value at risk    -0.012785
+dtype: float64
+Test Finished!
+episode_return 1.2567884283151582
+==============Get Backtest Results of sac===========
+Annual return           0.636046
+Cumulative returns      0.256788
+Annual volatility       0.159937
+Sharpe ratio            3.185482
+Calmar ratio           17.426804
+Stability               0.827809
+Max drawdown           -0.036498
+Omega ratio             1.947309
+Sortino ratio           6.717312
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              1.343885
+Daily value at risk    -0.018128
+dtype: float64
+117
+Testing scenario:  uptrend_2
+Successfully transformed into array
+Test Finished!
+episode_return 1.1573552027987561
+==============Get Backtest Results of ddpg===========
+Annual return           0.603416
+Cumulative returns      0.157355
+Annual volatility       0.140427
+Sharpe ratio            3.478349
+Calmar ratio           13.641772
+Stability               0.917582
+Max drawdown           -0.044233
+Omega ratio             1.803632
+Sortino ratio           5.620568
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              1.396523
+Daily value at risk    -0.015754
+dtype: float64
+Test Finished!
+episode_return 1.0099503988176062
+==============Get Backtest Results of ppo===========
+Annual return          0.032506
+Cumulative returns     0.009950
+Annual volatility      0.141907
+Sharpe ratio           0.299390
+Calmar ratio           0.461911
+Stability              0.066487
+Max drawdown          -0.070372
+Omega ratio            1.059421
+Sortino ratio          0.366300
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.798893
+Daily value at risk   -0.017710
+dtype: float64
+Test Finished!
+episode_return 1.06965630285556
+==============Get Backtest Results of td3===========
+Annual return          0.243030
+Cumulative returns     0.069656
+Annual volatility      0.144364
+Sharpe ratio           1.599187
+Calmar ratio           5.276808
+Stability              0.685080
+Max drawdown          -0.046056
+Omega ratio            1.348590
+Sortino ratio          2.068682
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.915150
+Daily value at risk   -0.017272
+dtype: float64
+Test Finished!
+episode_return 1.0672797924375175
+==============Get Backtest Results of sac===========
+Annual return          0.234129
+Cumulative returns     0.067280
+Annual volatility      0.086499
+Sharpe ratio           2.507270
+Calmar ratio           6.309767
+Stability              0.338408
+Max drawdown          -0.037106
+Omega ratio            1.578287
+Sortino ratio          4.009791
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.030819
+Daily value at risk   -0.010037
+dtype: float64
+78
+Testing scenario:  uptrend_3
+Successfully transformed into array
+Test Finished!
+episode_return 1.4025627824719227
+==============Get Backtest Results of ddpg===========
+Annual return          0.854782
+Cumulative returns     0.402563
+Annual volatility      0.205555
+Sharpe ratio           3.133510
+Calmar ratio           6.469881
+Stability              0.848900
+Max drawdown          -0.132117
+Omega ratio            1.760074
+Sortino ratio          4.850055
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.440334
+Daily value at risk   -0.023341
+dtype: float64
+Test Finished!
+episode_return 1.3452422829308117
+==============Get Backtest Results of ppo===========
+Annual return          0.718703
+Cumulative returns     0.345242
+Annual volatility      0.180195
+Sharpe ratio           3.120111
+Calmar ratio           6.516196
+Stability              0.908846
+Max drawdown          -0.110295
+Omega ratio            1.733833
+Sortino ratio          5.117008
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.816348
+Daily value at risk   -0.020471
+dtype: float64
+Test Finished!
+episode_return 1.3567115461918657
+==============Get Backtest Results of td3===========
+Annual return          0.745556
+Cumulative returns     0.356712
+Annual volatility      0.192277
+Sharpe ratio           3.017210
+Calmar ratio           6.504683
+Stability              0.879624
+Max drawdown          -0.114618
+Omega ratio            1.700293
+Sortino ratio          4.767443
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.446128
+Daily value at risk   -0.021923
+dtype: float64
+Test Finished!
+episode_return 1.3246985005846825
+==============Get Backtest Results of sac===========
+Annual return          0.671077
+Cumulative returns     0.324699
+Annual volatility      0.192051
+Sharpe ratio           2.790961
+Calmar ratio           6.480428
+Stability              0.862679
+Max drawdown          -0.103554
+Omega ratio            1.739136
+Sortino ratio          4.780649
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.565226
+Daily value at risk   -0.022069
+dtype: float64
+138
+Testing scenario:  uptrend_4
+Successfully transformed into array
+Test Finished!
+episode_return 1.4492743498029883
+==============Get Backtest Results of ddpg===========
+Annual return           1.271055
+Cumulative returns      0.449274
+Annual volatility       0.176754
+Sharpe ratio            4.776699
+Calmar ratio           30.471119
+Stability               0.923031
+Max drawdown           -0.041713
+Omega ratio             2.309016
+Sortino ratio           8.491313
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              1.623044
+Daily value at risk    -0.018919
+dtype: float64
+Test Finished!
+episode_return 1.36017401123813
+==============Get Backtest Results of ppo===========
+Annual return           0.973850
+Cumulative returns      0.360174
+Annual volatility       0.172529
+Sharpe ratio            4.067392
+Calmar ratio           16.364097
+Stability               0.786286
+Max drawdown           -0.059511
+Omega ratio             2.110980
+Sortino ratio           6.252854
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              1.291775
+Daily value at risk    -0.018952
+dtype: float64
+Test Finished!
+episode_return 1.4432052272657572
+==============Get Backtest Results of td3===========
+Annual return           1.250085
+Cumulative returns      0.443205
+Annual volatility       0.158200
+Sharpe ratio            5.258692
+Calmar ratio           26.732767
+Stability               0.940480
+Max drawdown           -0.046762
+Omega ratio             2.471224
+Sortino ratio           8.373564
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              1.598656
+Daily value at risk    -0.016630
+dtype: float64
+Test Finished!
+episode_return 1.3561911892321994
+==============Get Backtest Results of sac===========
+Annual return           0.961096
+Cumulative returns      0.356191
+Annual volatility       0.140431
+Sharpe ratio            4.913797
+Calmar ratio           24.131863
+Stability               0.497456
+Max drawdown           -0.039827
+Omega ratio             2.655422
+Sortino ratio          11.502565
+Skew                         NaN
+Kurtosis                     NaN
+Tail ratio              1.593756
+Daily value at risk    -0.014954
+dtype: float64
+114
+Testing scenario:  uptrend_5
+Successfully transformed into array
+Test Finished!
+episode_return 1.1536067261017862
+==============Get Backtest Results of ddpg===========
+Annual return          0.428359
+Cumulative returns     0.153607
+Annual volatility      0.173470
+Sharpe ratio           2.163471
+Calmar ratio           6.623646
+Stability              0.784131
+Max drawdown          -0.064671
+Omega ratio            1.424106
+Sortino ratio          3.177316
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.087084
+Daily value at risk   -0.020366
+dtype: float64
+Test Finished!
+episode_return 1.1844374229183565
+==============Get Backtest Results of ppo===========
+Annual return          0.525515
+Cumulative returns     0.184437
+Annual volatility      0.213257
+Sharpe ratio           2.107715
+Calmar ratio           7.497269
+Stability              0.817873
+Max drawdown          -0.070094
+Omega ratio            1.443580
+Sortino ratio          3.171478
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.297019
+Daily value at risk   -0.025084
+dtype: float64
+Test Finished!
+episode_return 1.111163521466972
+==============Get Backtest Results of td3===========
+Annual return          0.300823
+Cumulative returns     0.111164
+Annual volatility      0.174780
+Sharpe ratio           1.607472
+Calmar ratio           4.553333
+Stability              0.657835
+Max drawdown          -0.066067
+Omega ratio            1.313705
+Sortino ratio          2.278179
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             1.085168
+Daily value at risk   -0.020905
+dtype: float64
+Test Finished!
+episode_return 1.0667262572286846
+==============Get Backtest Results of sac===========
+Annual return          0.174880
+Cumulative returns     0.066726
+Annual volatility      0.154093
+Sharpe ratio           1.133271
+Calmar ratio           2.101659
+Stability              0.182467
+Max drawdown          -0.083211
+Omega ratio            1.213008
+Sortino ratio          1.581721
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.948973
+Daily value at risk   -0.018721
+dtype: float64
+101
+Testing scenario:  sideway_1
+Successfully transformed into array
+Test Finished!
+episode_return 0.8094324259741589
+==============Get Backtest Results of ddpg===========
+Annual return         -0.246778
+Cumulative returns    -0.190568
+Annual volatility      0.113535
+Sharpe ratio          -2.451330
+Calmar ratio          -1.265402
+Stability              0.927328
+Max drawdown          -0.195020
+Omega ratio            0.658745
+Sortino ratio         -2.926012
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.649695
+Daily value at risk   -0.015408
+dtype: float64
+Test Finished!
+episode_return 0.9332873169140864
+==============Get Backtest Results of ppo===========
+Annual return         -0.088393
+Cumulative returns    -0.066713
+Annual volatility      0.112331
+Sharpe ratio          -0.772177
+Calmar ratio          -0.965575
+Stability              0.131731
+Max drawdown          -0.091544
+Omega ratio            0.878320
+Sortino ratio         -1.025882
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.927800
+Daily value at risk   -0.014497
+dtype: float64
+Test Finished!
+episode_return 0.84077846257183
+==============Get Backtest Results of td3===========
+Annual return         -0.207423
+Cumulative returns    -0.159222
+Annual volatility      0.120662
+Sharpe ratio          -1.875532
+Calmar ratio          -1.233483
+Stability              0.697122
+Max drawdown          -0.168161
+Omega ratio            0.719576
+Sortino ratio         -2.270478
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.684767
+Daily value at risk   -0.016100
+dtype: float64
+Test Finished!
+episode_return 0.929507725557038
+==============Get Backtest Results of sac===========
+Annual return         -0.093338
+Cumulative returns    -0.070492
+Annual volatility      0.110414
+Sharpe ratio          -0.837019
+Calmar ratio          -1.020145
+Stability              0.249300
+Max drawdown          -0.091495
+Omega ratio            0.872114
+Sortino ratio         -1.113887
+Skew                        NaN
+Kurtosis                    NaN
+Tail ratio             0.802852
+Daily value at risk   -0.014278
+dtype: float64
+188
