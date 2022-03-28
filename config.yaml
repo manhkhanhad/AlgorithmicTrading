@@ -44,9 +44,9 @@ ERL_PARAMS: {"learning_rate": 0.0003 ,"batch_size": 4096, "gamma":  0.985,
 
 BREAK_STEP: 100000
 
-RESULT_FOLDER: './results/Debug/'
+RESULT_FOLDER: './Results/Debug/'
 
-TRAINED_MODEL_FOLDER: './trained_models/Debug/'
+TRAINED_MODEL_FOLDER: './TrainedModels/Debug/'
 
 TECHNICAL_INDICATORS_LIST: ['macd', 'boll_ub', 'boll_lb', 'rsi_30', 'cci_30', 'dx_30', 'close_30_sma', 'close_60_sma']
 

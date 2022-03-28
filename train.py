@@ -6,10 +6,12 @@ import os
 from finrl import config as config_finrl
 
 #from finrl.finrl_meta.env_stock_trading.env_stocktrading import StockTradingEnv
-from finrl.drl_agents.elegantrl.models import DRLAgent as DRLAgent_erl
+#from finrl.drl_agents.elegantrl.models import DRLAgent as DRLAgent_erl
+from Model.elegantrl import DRLAgent as DRLAgent_erl
+
 from finrl.finrl_meta.preprocessor.preprocessors import FeatureEngineer, data_split
 from finrl.finrl_meta.data_processor import DataProcessor
-from model.enviroment import StockTradingEnv
+from Model.enviroment import StockTradingEnv
 from finrl.plot import backtest_stats, backtest_plot, get_daily_return, get_baseline
 from pprint import pprint
 import sys

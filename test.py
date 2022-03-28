@@ -7,10 +7,10 @@ from finrl import config
 
 #from finrl.finrl_meta.env_stock_trading.env_stocktrading import StockTradingEnv
 #from finrl.drl_agents.elegantrl.models import DRLAgent as DRLAgent_erl
-from model.elegantrl import DRLAgent as DRLAgent_erl
+from Model.elegantrl import DRLAgent as DRLAgent_erl
 from finrl.finrl_meta.preprocessor.preprocessors import FeatureEngineer, data_split
 from finrl.finrl_meta.data_processor import DataProcessor
-from model.enviroment import StockTradingEnv
+from Model.enviroment import StockTradingEnv
 from finrl.plot import backtest_stats, backtest_plot, get_daily_return, get_baseline
 from pprint import pprint
 import sys
@@ -20,8 +20,8 @@ import numpy as np
 import os
 import gym
 
-from utils.utils import read_yaml, df_to_array
-from utils.visualize import visualize, visualize_trading_action
+from Utils.utils import read_yaml, df_to_array
+from Utils.visualize import visualize, visualize_trading_action
 def test(config):
     # Load data
     processed = pd.read_csv(config['DATA_PATH'])

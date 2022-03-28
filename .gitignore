@@ -1,7 +1,7 @@
-results/
-trained_models/
-model/__pycache__/
-utils/__pycache__/
+Results/
+TrainedModels/
+Model/__pycache__/
+Utils/__pycache__/
 visualization/__pycache__/
 vnquant/
 vnquant.egg-info/*
