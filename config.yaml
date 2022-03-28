@@ -38,14 +38,16 @@ BEGIN_DAY: '2009-12-22'
 
 AGENTS: ['ddpg', 'ppo', 'td3', 'sac']
 
-ERL_PARAMS: {"learning_rate": 0.0003 ,"batch_size": 2048, "gamma":  0.985,
+ERL_PARAMS: {"learning_rate": 0.0003 ,"batch_size": 4096, "gamma":  0.985,
             "seed": 312,"net_dimension": 512, "target_step": 100000, "eval_gap": 60,
-            "eval_times": 1, 'learner_gpus': 7}
+            "eval_times": 1,'learner_gpus': -1}
 
 BREAK_STEP: 100000
 
 RESULT_FOLDER: './results/Debug/'
 
-TRAINED_MODEL_FOLDER: './trained_models/ElegantRL_smallperiod/'
+TRAINED_MODEL_FOLDER: './trained_models/Debug/'
 
 TECHNICAL_INDICATORS_LIST: ['macd', 'boll_ub', 'boll_lb', 'rsi_30', 'cci_30', 'dx_30', 'close_30_sma', 'close_60_sma']
+
+VISUALIZE_TRADING_ACTION: True

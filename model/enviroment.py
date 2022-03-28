@@ -32,6 +32,7 @@ class StockTradingEnv(gym.Env):
         self.reward_scaling = reward_scaling
         self.initial_capital = initial_capital
         self.initial_stocks = np.zeros(stock_dim, dtype=np.float32) if initial_stocks is None else initial_stocks
+        self.min_stock_batch = 10 # minimum number of stocks to buy/sell
 
         # reset()
         self.day = None
@@ -78,7 +79,7 @@ class StockTradingEnv(gym.Env):
 
     def step(self, actions):
         actions = (actions * self.max_stock).astype(int)
-        print(self.stocks)
+        buy_sell_actions = [0] * self.action_dim
         self.day += 1
         price = self.price_ary[self.day]
         self.stocks_cd += 1
@@ -88,12 +89,16 @@ class StockTradingEnv(gym.Env):
             for index in np.where(actions < -min_action)[0]:  # sell_index:
                 if price[index] > 0:  # Sell only if current asset is > 0
                     sell_num_shares = min(self.stocks[index], -actions[index])
+                    sell_num_shares = sell_num_shares - sell_num_shares % self.min_stock_batch
+                    buy_sell_actions[index] = -sell_num_shares
                     self.stocks[index] -= sell_num_shares
                     self.amount += price[index] * sell_num_shares * (1 - self.sell_cost_pct)
                     self.stocks_cd[index] = 0
             for index in np.where(actions > min_action)[0]:  # buy_index:
                 if price[index] > 0:  # Buy only if the price is > 0 (no missing data in this particular date)
                     buy_num_shares = min(self.amount // price[index], actions[index])
+                    buy_num_shares = buy_num_shares - buy_num_shares % self.min_stock_batch
+                    buy_sell_actions[index] = buy_num_shares
                     self.stocks[index] += buy_num_shares
                     self.amount -= price[index] * buy_num_shares * (1 + self.buy_cost_pct)
                     self.stocks_cd[index] = 0
@@ -113,8 +118,11 @@ class StockTradingEnv(gym.Env):
         if done:
             reward = self.gamma_reward
             self.episode_return = total_asset / self.initial_total_asset
-
-        return state, reward, done, dict()
+        
+        if not self.if_train:
+            return state, reward, done, buy_sell_actions, dict()
+        else:
+            return state, reward, done, dict()
 
     def get_state(self, price):
         amount = np.array(max(self.amount, 1e4) * (2 ** -12), dtype=np.float32)

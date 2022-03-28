@@ -21,7 +21,7 @@ import os
 import gym
 
 from utils.utils import read_yaml, df_to_array
-from utils.visualize import visualize
+from utils.visualize import visualize, visualize_trading_action
 def test(config):
     # Load data
     processed = pd.read_csv(config['DATA_PATH'])
@@ -45,17 +45,27 @@ def test(config):
 
         for agent_name in config['AGENTS']:
             #Test trained model
-            episode_total_assets = DRLAgent_erl.DRL_prediction(model_name=agent_name,
+            episode_total_assets, episode_sell_buy = DRLAgent_erl.DRL_prediction(model_name=agent_name,
                                                     cwd=config["TRAINED_MODEL_FOLDER"] + scenario + '/' + agent_name,
                                                     net_dimension=config['ERL_PARAMS']['net_dimension'],
-                                                    environment=env_instance)
+                                                    environment=env_instance, devices = config['ERL_PARAMS']['learner_gpus'],)
         
             date_list = pd.DataFrame(trade['date'].unique(), columns=['date'])
             account_value_erl = pd.DataFrame({'date':date_list['date'],'account_value':episode_total_assets[0:len(episode_total_assets)]})
+            #episode_sell_buy_erl = pd.DataFrame({'date':date_list['date'],'sell_buy':episode_sell_buy[0:len(episode_sell_buy)]})
+        
+
+            episode_sell_buy_df = {'date':date_list['date']}
+
+            for i,tic in enumerate(trade['tic'].unique()):
+                episode_sell_buy_df[tic] = episode_sell_buy[:,i]
+                print(len(episode_sell_buy_df[tic]))
+            episode_sell_buy_df = pd.DataFrame(episode_sell_buy_df)
 
             #Save the account value during trading period
             os.makedirs(config["RESULT_FOLDER"] + scenario + '/' + agent_name, exist_ok=True)
             account_value_erl.to_csv(config["RESULT_FOLDER"] + scenario + '/' + agent_name + "/account_value.csv")
+            episode_sell_buy_df.to_csv(config["RESULT_FOLDER"] + scenario + '/' + agent_name + "/sell_buy.csv")
 
             #Print the results
             print("==============Get Backtest Results of {}===========".format(agent_name))
@@ -65,8 +75,11 @@ def test(config):
             perf_stats_all = pd.DataFrame(perf_stats_all)
         
     #Visulize the results
-        visualize(config["RESULT_FOLDER"] + '/' + scenario, config['AGENTS'], with_VNI= True)
+        visualize(config,scenario, with_VNI= True)
 
+        if config['VISUALIZE_TRADING_ACTION']:
+            visualize_trading_action(begin_trade, end_trade,scenario,config)
+        
 if __name__ == "__main__":
     config_path = "config.yaml"
     config = read_yaml(config_path)

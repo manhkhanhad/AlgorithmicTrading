@@ -7,7 +7,7 @@ from elegantrl.agents.agent import AgentTD3
 from elegantrl.train.config import Arguments
 # from elegantrl.agents.agent import AgentA2C
 from elegantrl.train.run import train_and_evaluate, init_agent
-
+import numpy as np
 MODELS = {"ddpg": AgentDDPG, "td3": AgentTD3, "sac": AgentSAC, "ppo": AgentPPO}
 OFF_POLICY_MODELS = ["ddpg", "td3", "sac"]
 ON_POLICY_MODELS = ["ppo"]
@@ -40,6 +40,7 @@ class DRLAgent:
         self.price_array = price_array
         self.tech_array = tech_array
         self.turbulence_array = turbulence_array
+        
 
     def get_model(self, model_name, model_kwargs):
         env_config = {
@@ -65,6 +66,7 @@ class DRLAgent:
                 model.target_step = model_kwargs["target_step"]
                 model.eval_gap = model_kwargs["eval_gap"]
                 model.eval_times = model_kwargs["eval_times"]
+                self.devices = model_kwargs["learner_gpus"]
             except BaseException:
                 raise ValueError(
                     "Fail to read arguments, please check 'model_kwargs' input."
@@ -77,7 +79,7 @@ class DRLAgent:
         train_and_evaluate(model)
 
     @staticmethod
-    def DRL_prediction(model_name, cwd, net_dimension, environment):
+    def DRL_prediction(model_name, cwd, net_dimension, environment, devices):
         if model_name not in MODELS:
             raise NotImplementedError("NotImplementedError")
         agent = MODELS[model_name]
@@ -87,7 +89,7 @@ class DRLAgent:
         args.net_dim = net_dimension
         # load agent
         try:
-            agent = init_agent(args, gpu_id=0)
+            agent = init_agent(args, gpu_id=devices)
             act = agent.act
             device = agent.device
         except BaseException:
@@ -98,6 +100,7 @@ class DRLAgent:
         state = environment.reset()
         episode_returns = []  # the cumulative_return / initial_account
         episode_total_assets = [environment.initial_total_asset]
+        episode_sell_buy = np.zeros((1,environment.action_dim))
         with _torch.no_grad():
             for i in range(environment.max_step):
                 s_tensor = _torch.as_tensor((state,), device=device)
@@ -105,7 +108,7 @@ class DRLAgent:
                 action = (
                     a_tensor.detach().cpu().numpy()[0]
                 )  # not need detach(), because with torch.no_grad() outside
-                state, reward, done, _ = environment.step(action)
+                state, reward, done, buy_sell_actions, _ = environment.step(action)
 
                 total_asset = (
                         environment.amount
@@ -116,9 +119,15 @@ class DRLAgent:
                 episode_total_assets.append(total_asset)
                 episode_return = total_asset / environment.initial_total_asset
                 episode_returns.append(episode_return)
+
+                buy_sell_actions = np.expand_dims(np.array(buy_sell_actions),axis=0)
+                episode_sell_buy = np.concatenate([episode_sell_buy, buy_sell_actions], axis = 0)
                 if done:
                     break
+        #episode_sell_buy = np.array(episode_sell_buy)
+
+        print("episode_sell_buy",episode_sell_buy.shape)
         print("Test Finished!")
         # return episode total_assets on testing data
         print("episode_return", episode_return)
-        return episode_total_assets
+        return episode_total_assets, episode_sell_buy
