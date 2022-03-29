@@ -14,12 +14,15 @@ class StockTradingEnv(gym.Env):
         tech_ary = config['tech_array']
         turbulence_ary = config['turbulence_array']
         if_train = config['if_train']
+        initial_stocks = config['initial_stocks']
         n = price_ary.shape[0]
         self.price_ary =  price_ary.astype(np.float32)
         self.tech_ary = tech_ary.astype(np.float32)
         self.turbulence_ary = turbulence_ary
         
-        self.tech_ary = self.tech_ary * 2 ** -7
+        #self.tech_ary = self.tech_ary * 2 ** -7 
+        self.tech_ary = self.tech_ary * 1 ** -7
+
         self.turbulence_bool = (turbulence_ary > turbulence_thresh).astype(np.float32)
         self.turbulence_ary = (self.sigmoid_sign(turbulence_ary, turbulence_thresh) * 2 ** -5).astype(np.float32)
 
@@ -31,6 +34,7 @@ class StockTradingEnv(gym.Env):
         self.sell_cost_pct = sell_cost_pct
         self.reward_scaling = reward_scaling
         self.initial_capital = initial_capital
+
         self.initial_stocks = np.zeros(stock_dim, dtype=np.float32) if initial_stocks is None else initial_stocks
         self.min_stock_batch = 10 # minimum number of stocks to buy/sell
 
@@ -62,7 +66,6 @@ class StockTradingEnv(gym.Env):
     def reset(self):
         self.day = 0
         price = self.price_ary[self.day]
-        
         if self.if_train:
             self.stocks = (self.initial_stocks + rd.randint(0, 64, size=self.initial_stocks.shape)).astype(np.float32)
             self.stocks_cd = np.zeros_like(self.stocks)
@@ -79,11 +82,11 @@ class StockTradingEnv(gym.Env):
 
     def step(self, actions):
         actions = (actions * self.max_stock).astype(int)
-        buy_sell_actions = [0] * self.action_dim
+        buy_sell_actions = [0] * self.action_dim # Just for loging action
         self.day += 1
         price = self.price_ary[self.day]
         self.stocks_cd += 1
-
+        trading_cost = 0
         if self.turbulence_bool[self.day] == 0:
             min_action = int(self.max_stock * self.min_stock_rate)  # stock_cd
             for index in np.where(actions < -min_action)[0]:  # sell_index:
@@ -92,6 +95,7 @@ class StockTradingEnv(gym.Env):
                     sell_num_shares = sell_num_shares - sell_num_shares % self.min_stock_batch
                     buy_sell_actions[index] = -sell_num_shares
                     self.stocks[index] -= sell_num_shares
+                    trading_cost += price[index] * sell_num_shares * self.sell_cost_pct # sell_cost
                     self.amount += price[index] * sell_num_shares * (1 - self.sell_cost_pct)
                     self.stocks_cd[index] = 0
             for index in np.where(actions > min_action)[0]:  # buy_index:
@@ -100,6 +104,7 @@ class StockTradingEnv(gym.Env):
                     buy_num_shares = buy_num_shares - buy_num_shares % self.min_stock_batch
                     buy_sell_actions[index] = buy_num_shares
                     self.stocks[index] += buy_num_shares
+                    trading_cost += price[index] * buy_num_shares * self.sell_cost_pct # sell_cost
                     self.amount -= price[index] * buy_num_shares * (1 + self.buy_cost_pct)
                     self.stocks_cd[index] = 0
 
@@ -107,7 +112,7 @@ class StockTradingEnv(gym.Env):
             self.amount += (self.stocks * price).sum() * (1 - self.sell_cost_pct)
             self.stocks[:] = 0
             self.stocks_cd[:] = 0
-
+        print("Trading cost: ", trading_cost)
         state = self.get_state(price)
         total_asset = self.amount + (self.stocks * price).sum()
         reward = (total_asset - self.total_asset) * self.reward_scaling
@@ -118,15 +123,21 @@ class StockTradingEnv(gym.Env):
         if done:
             reward = self.gamma_reward
             self.episode_return = total_asset / self.initial_total_asset
-        
+
         if not self.if_train:
             return state, reward, done, buy_sell_actions, dict()
         else:
             return state, reward, done, dict()
 
     def get_state(self, price):
-        amount = np.array(max(self.amount, 1e4) * (2 ** -12), dtype=np.float32)
-        scale = np.array(2 ** -6, dtype=np.float32)
+        # origin code: scale is the fator of 2 (2 ** -6, 2 ** -12), which is difficult to debug, thus, 
+        # I change this scale to factor of 1
+        #amount = np.array(max(self.amount, 1e4) * (2 ** -12), dtype=np.float32)
+        #scale = np.array(2 ** -6, dtype=np.float32)
+
+        amount = np.array(max(self.amount, 1e4) * (1 ** -12), dtype=np.float32)
+        scale = np.array(1 ** -6, dtype=np.float32)
+
         return np.hstack((amount,
                           self.turbulence_ary[self.day],
                           self.turbulence_bool[self.day],
