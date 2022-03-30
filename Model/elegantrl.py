@@ -66,7 +66,8 @@ class DRLAgent:
                 model.target_step = model_kwargs["target_step"]
                 model.eval_gap = model_kwargs["eval_gap"]
                 model.eval_times = model_kwargs["eval_times"]
-                self.devices = model_kwargs["learner_gpus"]
+                model.learner_gpus = model_kwargs["learner_gpus"]
+                #self.devices = model_kwargs["learner_gpus"]
             except BaseException:
                 raise ValueError(
                     "Fail to read arguments, please check 'model_kwargs' input."
@@ -101,6 +102,7 @@ class DRLAgent:
         episode_returns = []  # the cumulative_return / initial_account
         episode_total_assets = [environment.initial_total_asset]
         episode_sell_buy = np.zeros((1,environment.action_dim))
+        rewards = []  #Just for logging
         with _torch.no_grad():
             for i in range(environment.max_step):
                 s_tensor = _torch.as_tensor((state,), device=device)
@@ -119,15 +121,15 @@ class DRLAgent:
                 episode_total_assets.append(total_asset)
                 episode_return = total_asset / environment.initial_total_asset
                 episode_returns.append(episode_return)
-
+                rewards.append(reward)
                 buy_sell_actions = np.expand_dims(np.array(buy_sell_actions),axis=0)
                 episode_sell_buy = np.concatenate([episode_sell_buy, buy_sell_actions], axis = 0)
                 if done:
                     break
         #episode_sell_buy = np.array(episode_sell_buy)
-
+        rewards.append(0)
         print("episode_sell_buy",episode_sell_buy.shape)
         print("Test Finished!")
         # return episode total_assets on testing data
         print("episode_return", episode_return)
-        return episode_total_assets, episode_sell_buy
+        return episode_total_assets, episode_sell_buy, rewards

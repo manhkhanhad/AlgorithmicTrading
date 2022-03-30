@@ -45,7 +45,7 @@ def test(config):
 
         for agent_name in config['AGENTS']:
             #Test trained model
-            episode_total_assets, episode_sell_buy = DRLAgent_erl.DRL_prediction(model_name=agent_name,
+            episode_total_assets, episode_sell_buy, rewards = DRLAgent_erl.DRL_prediction(model_name=agent_name,
                                                     cwd=config["TRAINED_MODEL_FOLDER"] + scenario + '/' + agent_name,
                                                     net_dimension=config['ERL_PARAMS']['net_dimension'],
                                                     environment=env_instance, devices = config['ERL_PARAMS']['learner_gpus'],)
@@ -53,9 +53,10 @@ def test(config):
             date_list = pd.DataFrame(trade['date'].unique(), columns=['date'])
             account_value_erl = pd.DataFrame({'date':date_list['date'],'account_value':episode_total_assets[0:len(episode_total_assets)]})
             #episode_sell_buy_erl = pd.DataFrame({'date':date_list['date'],'sell_buy':episode_sell_buy[0:len(episode_sell_buy)]})
-        
 
-            episode_sell_buy_df = {'date':date_list['date']}
+            print("len rewards: ", len(rewards))
+
+            episode_sell_buy_df = {'date':date_list['date'], 'reward': rewards}
 
             for i,tic in enumerate(trade['tic'].unique()):
                 episode_sell_buy_df[tic] = episode_sell_buy[:,i]

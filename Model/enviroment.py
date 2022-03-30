@@ -14,7 +14,7 @@ class StockTradingEnv(gym.Env):
         tech_ary = config['tech_array']
         turbulence_ary = config['turbulence_array']
         if_train = config['if_train']
-        initial_stocks = config['initial_stocks']
+        #initial_stocks = config['initial_stocks']
         n = price_ary.shape[0]
         self.price_ary =  price_ary.astype(np.float32)
         self.tech_ary = tech_ary.astype(np.float32)
@@ -112,7 +112,7 @@ class StockTradingEnv(gym.Env):
             self.amount += (self.stocks * price).sum() * (1 - self.sell_cost_pct)
             self.stocks[:] = 0
             self.stocks_cd[:] = 0
-        print("Trading cost: ", trading_cost)
+        #print("Trading cost: ", trading_cost)
         state = self.get_state(price)
         total_asset = self.amount + (self.stocks * price).sum()
         reward = (total_asset - self.total_asset) * self.reward_scaling

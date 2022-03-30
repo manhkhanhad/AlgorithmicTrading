@@ -21,7 +21,7 @@ import numpy as np
 import os
 import gym
 
-from utils.utils import read_yaml, df_to_array
+from Utils.utils import read_yaml, df_to_array
 
 def train(config):
     # Load data
