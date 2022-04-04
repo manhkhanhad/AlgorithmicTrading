@@ -7,7 +7,7 @@ from finrl import config
 
 #from finrl.finrl_meta.env_stock_trading.env_stocktrading import StockTradingEnv
 #from finrl.drl_agents.elegantrl.models import DRLAgent as DRLAgent_erl
-from Model.elegantrl import DRLAgent as DRLAgent_erl
+from Model.elegantrlAgent import DRLAgent as DRLAgent_erl
 from finrl.finrl_meta.preprocessor.preprocessors import FeatureEngineer, data_split
 from finrl.finrl_meta.data_processor import DataProcessor
 from Model.enviroment import StockTradingEnv
@@ -32,7 +32,9 @@ def test(config):
         print("Testing scenario: ", scenario)
         begin_trade, end_trade = config['PERIODS'][scenario]
         train = data_split(processed, config['BEGIN_DAY'], begin_trade)   #yyyy-mm-dd
-        trade = data_split(processed, begin_trade, end_trade)
+        #trade = data_split(processed, begin_trade, end_trade)
+        trade = data_split(processed, config['BEGIN_DAY'], begin_trade)   #yyyy-mm-dd
+
         test_price_array, test_tech_array, test_turbulence_array = df_to_array(trade, tech_indicator_list= config['TECHNICAL_INDICATORS_LIST'], if_vix= True)
 
         #Create Environment
@@ -45,7 +47,7 @@ def test(config):
 
         for agent_name in config['AGENTS']:
             #Test trained model
-            episode_total_assets, episode_sell_buy, rewards = DRLAgent_erl.DRL_prediction(model_name=agent_name,
+            episode_total_assets, episode_sell_buy, rewards, action_values = DRLAgent_erl.DRL_prediction(model_name=agent_name,
                                                     cwd=config["TRAINED_MODEL_FOLDER"] + scenario + '/' + agent_name,
                                                     net_dimension=config['ERL_PARAMS']['net_dimension'],
                                                     environment=env_instance, devices = config['ERL_PARAMS']['learner_gpus'],)
@@ -53,6 +55,7 @@ def test(config):
             date_list = pd.DataFrame(trade['date'].unique(), columns=['date'])
             account_value_erl = pd.DataFrame({'date':date_list['date'],'account_value':episode_total_assets[0:len(episode_total_assets)]})
             #episode_sell_buy_erl = pd.DataFrame({'date':date_list['date'],'sell_buy':episode_sell_buy[0:len(episode_sell_buy)]})
+            action_values_pd = pd.DataFrame({'date':date_list['date'],'-1':action_values[:,0],'-0.5':action_values[:,1],'0':action_values[:,2],'0.5':action_values[:,3],'1':action_values[:,4]})
 
             print("len rewards: ", len(rewards))
 
@@ -67,7 +70,7 @@ def test(config):
             os.makedirs(config["RESULT_FOLDER"] + scenario + '/' + agent_name, exist_ok=True)
             account_value_erl.to_csv(config["RESULT_FOLDER"] + scenario + '/' + agent_name + "/account_value.csv")
             episode_sell_buy_df.to_csv(config["RESULT_FOLDER"] + scenario + '/' + agent_name + "/sell_buy.csv")
-
+            action_values_pd.to_csv(config["RESULT_FOLDER"] + scenario + '/' + agent_name + "/action_values.csv")
             #Print the results
             print("==============Get Backtest Results of {}===========".format(agent_name))
             now = datetime.datetime.now().strftime('%Y%m%d-%Hh%M')
@@ -76,10 +79,10 @@ def test(config):
             perf_stats_all = pd.DataFrame(perf_stats_all)
         
     #Visulize the results
-        visualize(config,scenario, with_VNI= True)
+        visualize(config,scenario, with_Baseline= True)
 
-        if config['VISUALIZE_TRADING_ACTION']:
-            visualize_trading_action(begin_trade, end_trade,scenario,config)
+        #if config['VISUALIZE_TRADING_ACTION']:
+        #    visualize_trading_action(begin_trade, end_trade,scenario,config)
         
 if __name__ == "__main__":
     config_path = "config.yaml"

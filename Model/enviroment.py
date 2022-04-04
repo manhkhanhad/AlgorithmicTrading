@@ -1,7 +1,9 @@
+from distutils.command import config
 import numpy as np
 import os
 import gym
 from numpy import random as rd
+from Model.reward_scheme import PenalizedProfit,AnomalousProfit, SimpleProfit
 
 class StockTradingEnv(gym.Env):
 
@@ -63,9 +65,11 @@ class StockTradingEnv(gym.Env):
         self.observation_space = gym.spaces.Box(low=-3000, high=3000, shape=(self.state_dim,), dtype=np.float32)
         self.action_space = gym.spaces.Box(low=-1, high=1, shape=(self.action_dim,), dtype=np.float32)
         
+        self.total_assets = [] # record the total assets
     def reset(self):
         self.day = 0
-        price = self.price_ary[self.day]
+        price = self.price_ary[self.day] 
+        #price = self.price_ary[self.day] * config['PRICE_SCALER']   # for scaling data
         if self.if_train:
             self.stocks = (self.initial_stocks + rd.randint(0, 64, size=self.initial_stocks.shape)).astype(np.float32)
             self.stocks_cd = np.zeros_like(self.stocks)
@@ -84,6 +88,8 @@ class StockTradingEnv(gym.Env):
         actions = (actions * self.max_stock).astype(int)
         buy_sell_actions = [0] * self.action_dim # Just for loging action
         self.day += 1
+        if self.day % 5000 == 0:
+            print('day:', self.day)
         price = self.price_ary[self.day]
         self.stocks_cd += 1
         trading_cost = 0
@@ -115,9 +121,15 @@ class StockTradingEnv(gym.Env):
         #print("Trading cost: ", trading_cost)
         state = self.get_state(price)
         total_asset = self.amount + (self.stocks * price).sum()
-        reward = (total_asset - self.total_asset) * self.reward_scaling
-        self.total_asset = total_asset
+        self.total_assets.append(total_asset)
 
+        #reward = PenalizedProfit(self.initial_capital, total_asset, self.amount, self.day)
+        #reward = AnomalousProfit(self.total_assets, self.day)
+        reward = SimpleProfit(self.total_assets, self.day)
+        #print("reward", reward)
+        # reward = (total_asset - self.total_asset) * self.reward_scaling
+
+        self.total_asset = total_asset
         self.gamma_reward = self.gamma_reward * self.gamma + reward
         done = self.day == self.max_step
         if done:

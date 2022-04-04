@@ -33,14 +33,14 @@ PERIODS: {"uptrend": ['2017-10-30','2018-04-03'], "downtrend": ['2018-12-03','20
           #}
  
 BEGIN_DAY: '2009-12-22'
-SCENARIOS: ['sideway', 'uptrend', 'downtrend']
+SCENARIOS: ['sideway', 'uptrend', 'downtrend'] #['sideway'] 
 #SCENARIOS: ['sideway', 'uptrend_1', 'downtrend', 'uptrend_2', 'crisis_1'] #, 'crisis_2']
 
-AGENTS: ['ddpg', 'ppo', 'td3', 'sac']
+AGENTS: ['ddpg']
 
 ERL_PARAMS: {"learning_rate": 0.0003 ,"batch_size": 4096, "gamma":  0.985,
             "seed": 312,"net_dimension": 512, "target_step": 100000, "eval_gap": 60,
-            "eval_times": 1,'learner_gpus': 3}
+            "eval_times": 1,"learner_gpus": -1, "if_use_per": False}
 
 BREAK_STEP: 100000
 
@@ -51,3 +51,9 @@ TRAINED_MODEL_FOLDER: './TrainedModels/Debug_reward/'
 TECHNICAL_INDICATORS_LIST: ['macd', 'boll_ub', 'boll_lb', 'rsi_30', 'cci_30', 'dx_30', 'close_30_sma', 'close_60_sma']
 
 VISUALIZE_TRADING_ACTION: True
+
+BASELINE_PATH : "Data/BVH.csv"
+
+PRICE_SCALER : 107.9 #Close price
+
+INITIAL_CAPITAL : 1000

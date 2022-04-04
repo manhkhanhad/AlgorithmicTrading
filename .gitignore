@@ -1,7 +1,7 @@
 Results/
 TrainedModels/
-Model/__pycache__/
-Utils/__pycache__/
-visualization/__pycache__/
+*/__pycache__/
 vnquant/
 vnquant.egg-info/*
+Model/elegantrl_/__pycache__
+*/*/*/__pycache__
