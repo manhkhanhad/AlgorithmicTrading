@@ -5,3 +5,6 @@ vnquant/
 vnquant.egg-info/*
 Model/elegantrl_/__pycache__
 */*/*/__pycache__
+Rllib_log
+test_ddpg
+*.txt

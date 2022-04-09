@@ -304,6 +304,7 @@ class AgentBase:
         if if_save:
             for name, obj in name_obj_list:
                 save_path = f"{cwd}/{name}.pth"
+                print("save to from:", save_path)
                 torch.save(obj.state_dict(), save_path)
         else:
             for name, obj in name_obj_list:
