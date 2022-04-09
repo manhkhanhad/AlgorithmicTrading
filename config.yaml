@@ -1,13 +1,13 @@
-DATA_PATH: "Data/BVH.csv"
-PERIODS: {"uptrend": ['2017-10-30','2018-04-03'], "downtrend": ['2018-12-03','2020-03-16'], "sideway" : ['2016-04-25','2017-07-17']}
-# PERIODS: { 
-#             "sideway": ['2014-10-01','2016-03-01'],  #yyyy-mm-dd
-#             "uptrend_1": ['2016-03-01','2018-03-01'],
-#             "downtrend": ['2018-03-01','2020-03-01'],
-#             "uptrend_2": ['2020-03-01','2021-12-31'],
-#             "crisis_1": ['2018-10-04','2018-11-16'],
-#             "crisis_2": ['2020-03-06','2020-04-01'],
-#           }
+DATA_PATH: "Data/VnStock_preprocessed.csv"
+#PERIODS: {"uptrend": ['2017-10-30','2018-04-03'], "downtrend": ['2018-12-03','2020-03-16'], "sideway" : ['2016-04-25','2017-07-17']}
+PERIODS: { 
+            "sideway": ['2014-10-01','2016-03-01'],  #yyyy-mm-dd
+            "uptrend_1": ['2016-03-01','2018-03-01'],
+            "downtrend": ['2018-03-01','2020-03-01'],
+            "uptrend_2": ['2020-03-01','2021-12-31'],
+            "crisis_1": ['2018-10-04','2018-11-16'],
+            "crisis_2": ['2020-03-06','2020-04-01'],
+          }
 
 #PERIODS: {
           #"crisis_1": ['2018-01-31','2018-02-09'],
@@ -33,21 +33,34 @@ PERIODS: {"uptrend": ['2017-10-30','2018-04-03'], "downtrend": ['2018-12-03','20
           #}
  
 BEGIN_DAY: '2009-12-22'
-SCENARIOS: ['sideway', 'uptrend', 'downtrend']
-#SCENARIOS: ['sideway', 'uptrend_1', 'downtrend', 'uptrend_2', 'crisis_1'] #, 'crisis_2']
+#SCENARIOS: ['sideway', 'uptrend', 'downtrend'] #['sideway'] 
+SCENARIOS: ['sideway', 'uptrend_1', 'downtrend', 'uptrend_2', 'crisis_1', 'crisis_2']
 
-AGENTS: ['ddpg', 'ppo', 'td3', 'sac']
+#AGENTS: ['sac','td3','a2c','ppo'] #'ddpg',
+AGENTS: ['ddpg']
+
 
 ERL_PARAMS: {"learning_rate": 0.0003 ,"batch_size": 4096, "gamma":  0.985,
             "seed": 312,"net_dimension": 512, "target_step": 100000, "eval_gap": 60,
-            "eval_times": 1,'learner_gpus': 3}
+            "eval_times": 1,"learner_gpus": -1, "if_use_per": False}
+
+SB3_PARAMS: {"learning_rate": 0.003, "buffer_size": 1000000, "batch_size": 4096, "tau": 0.05, "gamma": 0.99,
+            "tensorboard_log": True,"verbose": True, "device": 4, "seed": 312 }
 
 BREAK_STEP: 100000
 
-RESULT_FOLDER: './Results/Debug_reward/'
+RESULT_FOLDER: './Results/RLlib/'
 
-TRAINED_MODEL_FOLDER: './TrainedModels/Debug_reward/'
+TRAINED_MODEL_FOLDER: './TrainedModels/RLlib/'
 
 TECHNICAL_INDICATORS_LIST: ['macd', 'boll_ub', 'boll_lb', 'rsi_30', 'cci_30', 'dx_30', 'close_30_sma', 'close_60_sma']
 
 VISUALIZE_TRADING_ACTION: True
+
+BASELINE_PATH : "Data/VNIndex.csv"
+
+PRICE_SCALER : 107.9 #Close price
+
+INITIAL_CAPITAL : 1000000
+
+RLLIB : "ray"  # chose form stable_baselines, ray, elegantrl
