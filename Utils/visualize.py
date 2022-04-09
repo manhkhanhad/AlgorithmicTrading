@@ -14,7 +14,7 @@ def visualization_single(result_folder):
 
     #fig.show()
 
-def visualize(config,scenario,with_VNI = False):
+def visualize(config,scenario,with_Baseline = False):
     result_folder = config["RESULT_FOLDER"] + '/' + scenario
     df = {"date": None}
     for agent_name in config['AGENTS']:
@@ -23,12 +23,12 @@ def visualize(config,scenario,with_VNI = False):
             df['date'] = temp['date'].tolist()
         df[agent_name] = temp['account_value'].tolist()
 
-    if with_VNI == True:
-        VNI = pd.read_csv("Data/VNIndex.csv").sort_values(['Date'])
+    if with_Baseline == True:
+        Baseline_name = os.path.split(config['BASELINE_PATH'])[-1][:-4]
+        Baseline = pd.read_csv(config['BASELINE_PATH']).sort_values(['date'])
         #VNI = VNI[(VNI['Date'] <= max(df['date'])) & (VNI['Date'] >= min(df['date']))]
-        VNI = VNI[VNI['Date'].isin(df['date'])]
-        df['VNIndex'] = VNI['Price'].tolist()
-        print(len(VNI))
+        Baseline = Baseline[Baseline['date'].isin(df['date'])]
+        df[Baseline_name] = Baseline['close'].tolist()
 
     df = pd.DataFrame.from_dict(df)
     # fig = px.line(df, x="date", y=df.keys()[1:], title='Portfolio Value during trading')
@@ -46,7 +46,7 @@ def visualize(config,scenario,with_VNI = False):
         )
 
     fig.add_trace(
-        go.Scatter(x=df["date"], y=df['VNIndex'], name="VNIndex"),
+        go.Scatter(x=df["date"], y=df[Baseline_name], name=Baseline_name),
         secondary_y=True,
     )
 
