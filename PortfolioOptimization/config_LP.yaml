@@ -13,3 +13,5 @@ SELL_ALL: True
 #Sell all == True means that the algorithm will sell all the stocks at the end of 
 #            period then buy according to the new portfolio proportion
 #Sell all == False means that the algorithm will sell and buy to sastify the new portfolio proportion (minimize the trading cost)
+
+SAVE_DIR: "Results"

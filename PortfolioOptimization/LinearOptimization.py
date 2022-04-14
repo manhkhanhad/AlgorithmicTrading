@@ -10,6 +10,7 @@ import cufflinks
 
 import plotly.express as px
 import plotly.graph_objects as go
+from utils import visualize_action
 
 from utils import read_yaml, convert_data_format, calculate_return, plot_observation_price
 
@@ -54,7 +55,9 @@ def sell_all_and_buy(stocks_pre, prices, cash, proportion, sell_fee = 0.001, buy
 
     trading_fee = np.dot(stock.T, prices) * (sell_fee) + np.dot(stock.T, prices) * (buy_fee)
 
-    return stock, cash[0,0], None, True, trading_fee
+    portfolio_value = cash + np.dot(stock.T, prices)
+
+    return stock, cash[0,0], None, True, trading_fee, portfolio_value
 
 
 def trading(stocks_pre, prices, cash, propotion, sell_fee = 0.001, buy_fee = 0.001):
@@ -97,6 +100,7 @@ def main(config):
     num_days,num_tic = data.shape[0], (data.shape[1] - 1) #minus 1 because of we don't need date column
 
     total_trading_fee = 0
+    actions = []
     #Backtesting
     stock = np.zeros((num_tic,1)) #init stock
     cash = config['INIT_CASH'] #init cash
@@ -111,7 +115,8 @@ def main(config):
         portpolio_proportion = portpolio_optimization(return_data, num_tic, config['LAMBDA'])
         print(portpolio_proportion)
         if config['SELL_ALL']:
-            stock, cash, action, done, trading_fee = sell_all_and_buy(stock, prices, cash, portpolio_proportion)
+            stock, cash, action, done, trading_fee, portfolio_value = sell_all_and_buy(stock, prices, cash, portpolio_proportion)
+            return_value = (portfolio_value - config['INIT_CASH']) / config['INIT_CASH']
             total_trading_fee += trading_fee
         else:
             stock, cash, action, done = trading(stock, prices, cash, portpolio_proportion)
@@ -122,9 +127,11 @@ def main(config):
 
         print("Date:", date, "Cash:", cash, "Stock:", stock, "Action:", action)
         print("-----------------------------------------------------")
+        actions.append((date, cash, stock, return_value[0,0]))
 
-    print("Final cash:", cash)
+    print("Final return value:", actions[-1][-1])
     print("Trading fee:", total_trading_fee)
+    visualize_action(data_raw, actions, config)
 if __name__ == '__main__':
     config_path = "config_LP.yaml"
     config = read_yaml(config_path)
