@@ -35,11 +35,12 @@ class DRLAgent:
             make a prediction in a test dataset and get results
     """
 
-    def __init__(self, env, price_array, tech_array, turbulence_array):
+    def __init__(self, env, price_array, tech_array, turbulence_array, config):
         self.env = env
         self.price_array = price_array
         self.tech_array = tech_array
         self.turbulence_array = turbulence_array
+        self.config = config
 
     def get_model(
             self,
@@ -112,6 +113,7 @@ class DRLAgent:
             tech_array,
             turbulence_array,
             agent_path="/mmlabworkspace/WorkSpaces/danhnt/tuyensh/khanhngo/AlgorithmicTrading/TrainedModels/RLlib/",
+            max_stock = 100
     ):
         if model_name not in MODELS:
             raise NotImplementedError("NotImplementedError")
@@ -136,7 +138,7 @@ class DRLAgent:
             "turbulence_array": turbulence_array,
             "if_train": False,
         }
-        env_instance = env(config=env_config)
+        env_instance = env(config=env_config, max_stock = max_stock)
 
         # ray.init() # Other Ray APIs will not work until `ray.init()` is called.
         if model_name == "ppo":
@@ -168,7 +170,6 @@ class DRLAgent:
         done = False
         while not done:
             action = trainer.compute_single_action(state)
-            print("action :", action)
             state, reward, done, sell_buy_actions, _ = env_instance.step(action)
 
             total_asset = (

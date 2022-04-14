@@ -101,7 +101,7 @@ def test_rllib(config):
             #Test trained model
             env = StockTradingEnv
             agent_path= config["TRAINED_MODEL_FOLDER"] + scenario + '/' + agent_name + "/checkpoint_000100/checkpoint-100"
-            episode_total_assets, episode_sell_buy, rewards, action_values = DRLAgent_rllib.DRL_prediction(agent_name,env, test_price_array, test_tech_array, test_turbulence_array,agent_path)
+            episode_total_assets, episode_sell_buy, rewards, action_values = DRLAgent_rllib.DRL_prediction(agent_name,env, test_price_array, test_tech_array, test_turbulence_array, agent_path, config['MAX_STOCK'],)
         
             date_list = pd.DataFrame(trade['date'].unique(), columns=['date'])
             account_value_erl = pd.DataFrame({'date':date_list['date'],'account_value':episode_total_assets[0:len(episode_total_assets)]})

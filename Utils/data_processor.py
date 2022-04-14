@@ -45,7 +45,7 @@ class DataDowloader:
             tmp.columns = ['high','low','open','close','adjust','volume']
             tmp = tmp.assign(tic=stock)
             tmp['date'] = tmp.index
-            tmp = tmp.drop('adjust',axis = 1)
+            #tmp = tmp.drop('adjust',axis = 1)
             self.data = pd.concat([self.data,tmp], ignore_index=True)
         
         self.data.to_csv(self.save_path)

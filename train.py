@@ -90,7 +90,8 @@ def train_rllib(config):
             agent = DRLAgent_rllib(env = env,
                                 price_array = train_price_array,
                                 tech_array=train_tech_array,
-                                turbulence_array=train_turbulence_array)
+                                turbulence_array=train_turbulence_array,
+                                config=config)
             model, model_config = agent.get_model(agent_name)
 
             trained_model = agent.train_model(model=model,
