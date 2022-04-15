@@ -14,8 +14,8 @@ def visualization_single(result_folder):
 
     #fig.show()
 
-def visualize(config,scenario,with_Baseline = False):
-    result_folder = config["RESULT_FOLDER"] + '/' + scenario
+def visualize(config,result_folder,with_Baseline = False):
+    #result_folder = config["RESULT_FOLDER"] + '/' + scenario
     df = {"date": None}
     for agent_name in config['AGENTS']:
         temp = pd.read_csv(os.path.join(result_folder, agent_name + "/account_value.csv"))
@@ -30,7 +30,11 @@ def visualize(config,scenario,with_Baseline = False):
         Baseline = Baseline[Baseline['date'].isin(df['date'])]
         df[Baseline_name] = Baseline['close'].tolist()
 
+    for col in df.keys():
+        print("len(df[{}]) = {}".format(col,len(df[col])))
+
     df = pd.DataFrame.from_dict(df)
+    
     # fig = px.line(df, x="date", y=df.keys()[1:], title='Portfolio Value during trading')
     # fig = px.line(df, x="date", y=df['VNIndex'])
     # fig.show()
@@ -44,15 +48,15 @@ def visualize(config,scenario,with_Baseline = False):
         go.Scatter(x=df["date"], y=df[agent_name], name=agent_name),
         secondary_y=False,
         )
-
-    fig.add_trace(
-        go.Scatter(x=df["date"], y=df[Baseline_name], name=Baseline_name),
-        secondary_y=True,
-    )
+    if with_Baseline == True:
+        fig.add_trace(
+            go.Scatter(x=df["date"], y=df[Baseline_name], name=Baseline_name),
+            secondary_y=True,
+        )
 
     # Add figure title
     fig.update_layout(
-        title_text="Porforlio Value during trading      Experiment name: " + ''.join(result_folder.split('/')[-3:])
+        title_text="Porforlio Value during trading      Experiment name: " + ' '.join(result_folder.split('/')[-3:])
     )
 
     # Set x-axis title

@@ -76,7 +76,7 @@ class DRLAgent:
 
         return model, model_config
 
-    def train_model(self, model, model_name, cwd, model_config, total_episodes=100, init_ray=True):
+    def train_model(self, model, model_name, cwd, model_config, total_episodes=100, init_ray=True, trained_agent_path = None):
         if model_name not in MODELS:
             raise NotImplementedError("NotImplementedError")
         if init_ray:
@@ -94,6 +94,13 @@ class DRLAgent:
             trainer = model.TD3Trainer(env=self.env, config=model_config)
         elif model_name == "sac":
             trainer = model.SACTrainer(env=self.env, config=model_config)
+
+        if trained_agent_path is not None:    # Load agent from a file and continue train
+            try:
+                trainer.restore(trained_agent_path)
+                print("Restoring from checkpoint path", trained_agent_path)
+            except BaseException:
+                raise ValueError("Fail to load agent!")
 
         for _ in range(total_episodes):
             trainer.train()
@@ -113,7 +120,8 @@ class DRLAgent:
             tech_array,
             turbulence_array,
             agent_path="/mmlabworkspace/WorkSpaces/danhnt/tuyensh/khanhngo/AlgorithmicTrading/TrainedModels/RLlib/",
-            max_stock = 100
+            max_stock = 100,
+            initial_capital = 1000000,
     ):
         if model_name not in MODELS:
             raise NotImplementedError("NotImplementedError")
@@ -138,7 +146,7 @@ class DRLAgent:
             "turbulence_array": turbulence_array,
             "if_train": False,
         }
-        env_instance = env(config=env_config, max_stock = max_stock)
+        env_instance = env(config=env_config, max_stock = max_stock, initial_capital = initial_capital)
 
         # ray.init() # Other Ray APIs will not work until `ray.init()` is called.
         if model_name == "ppo":

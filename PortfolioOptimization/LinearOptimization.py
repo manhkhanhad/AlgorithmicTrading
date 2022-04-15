@@ -104,6 +104,7 @@ def main(config):
     #Backtesting
     stock = np.zeros((num_tic,1)) #init stock
     cash = config['INIT_CASH'] #init cash
+    previous_portfolio_value = cash
     for t in range(0, (num_days - config["OBSERVATION_STEPS"])//config["WAIT_STEPS"] + 1):
         trading_day = config["OBSERVATION_STEPS"] + t * config["WAIT_STEPS"]
         observation_data = data[trading_day - config["OBSERVATION_STEPS"] : trading_day ,:]
@@ -113,10 +114,15 @@ def main(config):
         date = data[trading_day-1,0]
         prices = data[trading_day-1,1:].reshape((num_tic,1))
         portpolio_proportion = portpolio_optimization(return_data, num_tic, config['LAMBDA'])
+
         print(portpolio_proportion)
         if config['SELL_ALL']:
             stock, cash, action, done, trading_fee, portfolio_value = sell_all_and_buy(stock, prices, cash, portpolio_proportion)
             return_value = (portfolio_value - config['INIT_CASH']) / config['INIT_CASH']
+            
+            is_profit = ((portfolio_value - previous_portfolio_value) > 0)
+            previous_portfolio_value = portfolio_value
+
             total_trading_fee += trading_fee
         else:
             stock, cash, action, done = trading(stock, prices, cash, portpolio_proportion)
@@ -127,7 +133,7 @@ def main(config):
 
         print("Date:", date, "Cash:", cash, "Stock:", stock, "Action:", action)
         print("-----------------------------------------------------")
-        actions.append((date, cash, stock, return_value[0,0]))
+        actions.append((date, cash, stock, return_value[0,0], is_profit))
 
     print("Final return value:", actions[-1][-1])
     print("Trading fee:", total_trading_fee)

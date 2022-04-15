@@ -126,7 +126,8 @@ def test_rllib(config):
             perf_stats_all = pd.DataFrame(perf_stats_all)
         
     #Visulize the results
-        visualize(config,scenario, with_Baseline= True)
+        result_folder = config["RESULT_FOLDER"] + '/' + scenario
+        visualize(config,result_folder, with_Baseline= True)
 
         if config['VISUALIZE_TRADING_ACTION']:
             visualize_trading_action(begin_trade, end_trade,scenario,config)
