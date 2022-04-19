@@ -71,7 +71,7 @@ class DRLAgent:
             "tech_array": self.tech_array,
             "turbulence_array": self.turbulence_array,
             "if_train": True,
-            "train_batch_size": 4096
+            "train_batch_size": 2018
         }
 
         return model, model_config
