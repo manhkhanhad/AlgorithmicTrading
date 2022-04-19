@@ -47,8 +47,7 @@ def train(agent_name,config, train_data, t, total_trained_episode):
     else:
         trained_agent_path = config["TRAINED_MODEL_FOLDER"] + agent_name + "/checkpoint_{}/checkpoint-{}".format("0"*(6-len(str(total_trained_episode))) + str(total_trained_episode), str(total_trained_episode))
 
-    #train_episode = min(20, 50 - 5*t) #Decrease training episode for each training round
-    train_episode = 1
+    train_episode = min(20, 50 - 5*t) #Decrease training episode for each training round
     trained_model = agent.train_model(model=model,
                                     model_name=agent_name,
                                     cwd = config["TRAINED_MODEL_FOLDER"] + '/' + agent_name,

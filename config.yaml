@@ -33,12 +33,12 @@ PERIODS: {
           #}
  
 BEGIN_DAY: '2009-12-22'
-END_TRAIN: '2021-12-22'
+END_TRAIN: '2020-01-01'
 #SCENARIOS: ['crisis_1', 'crisis_2'] #['sideway'] 
 #SCENARIOS: ['sideway', 'uptrend_1', 'downtrend', 'uptrend_2', 'crisis_1', 'crisis_2']
 
 #AGENTS: ['ddpg','sac','td3','a2c','ppo']
-AGENTS: ['ddpg']
+AGENTS: ['sac']
 
 
 ERL_PARAMS: {"learning_rate": 0.0003 ,"batch_size": 4096, "gamma":  0.985,

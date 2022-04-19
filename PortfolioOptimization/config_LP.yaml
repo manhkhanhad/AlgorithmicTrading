@@ -1,13 +1,13 @@
-START_DAY: '2020-01-01'
-END_DAY: '2021-12-31'
+START_DAY: '2018-03-01'
+END_DAY: '2020-03-01'
 
-OBSERVATION_STEPS: 60
-WAIT_STEPS: 30
+OBSERVATION_STEPS: 240
+WAIT_STEPS: 70
 
 DATA_PATH: "/mmlabworkspace/WorkSpaces/danhnt/tuyensh/khanhngo/AlgorithmicTrading/Data/VN_stock_adjusted.csv"
 
 INIT_CASH: 1000000
-LAMBDA: 1
+LAMBDA: 2
 
 SELL_ALL: True
 #Sell all == True means that the algorithm will sell all the stocks at the end of 

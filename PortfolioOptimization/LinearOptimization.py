@@ -1,4 +1,5 @@
 from turtle import width
+from unittest import result
 import numpy as np
 import matplotlib.pyplot as plt
 import cvxopt as opt
@@ -19,6 +20,8 @@ def portpolio_optimization(data, num_tic, lambda_ = 1):
     mean = np.mean(data, axis=0).round(decimals=3)
     risk = np.mean((data - mean))
 
+    lambda_ = lambda_ * (risk/np.mean(mean))
+    print("lambda_", lambda_)
     #Defind LP parameters
     c = -opt.matrix((mean * lambda_- risk).astype(np.double))
     A = opt.matrix(1.0, (1, num_tic))
@@ -135,10 +138,49 @@ def main(config):
         print("-----------------------------------------------------")
         actions.append((date, cash, stock, return_value[0,0], is_profit))
 
-    print("Final return value:", actions[-1][-1])
+    print("Final return value:", actions[-1][-2])
     print("Trading fee:", total_trading_fee)
     visualize_action(data_raw, actions, config)
+    return actions[-1][-2] #return return_value
+
+def tuning(config):
+    tune_config = {
+        "DATA_PATH": config["DATA_PATH"],
+        "START_DAY": config["START_DAY"],
+        "END_DAY": config["END_DAY"],
+        "INIT_CASH": config["INIT_CASH"],
+        "SAVE_DIR": "Results",
+        "SELL_ALL": True,
+        "LAMBDA": None,
+        "OBSERVATION_STEPS": None,
+        "WAIT_STEPS": None
+    }
+
+    results = {
+        "lambda": [],
+        "observation_steps": [],
+        "wait_steps": [],
+        "return_value": []
+    }
+
+    for lamda in np.arange(0,5,0.5):
+        for observation_step in np.arange(30, 360, 30):
+            for wait_step in np.arange(10, 90, 10):
+                tune_config["LAMBDA"] = lamda
+                tune_config["OBSERVATION_STEPS"] = observation_step
+                tune_config["WAIT_STEPS"] = wait_step
+                return_value = main(tune_config)
+                results["lambda"].append(lamda)
+                results["observation_steps"].append(observation_step)
+                results["wait_steps"].append(wait_step)
+                results["return_value"].append(return_value)
+                print("Lambda:", lamda, "Observation_step:", observation_step, "Wait_step:", wait_step, "Return value:", result)
+                print("-----------------------------------------------------")
+    df = pd.DataFrame(results)
+    df.to_csv(config["SAVE_DIR"] + "/tuning_result.csv")
+
 if __name__ == '__main__':
     config_path = "config_LP.yaml"
     config = read_yaml(config_path)
     main(config)
+    #tuning(config)
