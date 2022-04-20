@@ -179,7 +179,6 @@ class DRLAgent:
         while not done:
             action = trainer.compute_single_action(state)
             state, reward, done, sell_buy_actions, _ = env_instance.step(action)
-
             total_asset = (
                     env_instance.amount
                     + (env_instance.price_ary[env_instance.day] * env_instance.stocks).sum()

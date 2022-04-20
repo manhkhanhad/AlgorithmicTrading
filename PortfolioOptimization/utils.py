@@ -42,11 +42,12 @@ def visualize_action(data_raw, actions, config):
 
     annotations = []
     color = 'DarkGreen'
-    for date, cash, stock, return_value, is_profit in actions:
+    for date, cash, stock, return_value, is_profit, portfolio_value in actions:
         
         hovertext = 'Date: {}<br>' \
                 'Rerturn: {} <br>' \
-                'Cash: {} <br>'.format(date, return_value, cash)
+                'Portfolio Value: {} <br>' \
+                'Cash: {} <br>'.format(date, return_value, portfolio_value, cash)
         for index, tic in enumerate(plot_data.tic.unique()):
             hovertext += '{}: {}<br>'.format(tic,stock[index][0])
         

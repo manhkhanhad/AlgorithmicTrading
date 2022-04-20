@@ -2,11 +2,11 @@ DATA_PATH: "Data/VN_stock_adjusted.csv"
 #PERIODS: {"uptrend": ['2017-10-30','2018-04-03'], "downtrend": ['2018-12-03','2020-03-16'], "sideway" : ['2016-04-25','2017-07-17']}
 PERIODS: { 
             #"sideway": ['2014-10-01','2016-03-01'],  #yyyy-mm-dd
-            #"uptrend_1": ['2016-03-01','2018-03-01'],
+            "uptrend_1": ['2016-03-01','2018-03-01'],
             #"downtrend": ['2018-03-01','2020-03-01'],
             #"uptrend_2": ['2020-03-01','2021-12-31'],
-            "crisis_1": ['2018-10-04','2018-11-16'],
-            "crisis_2": ['2020-03-06','2020-04-01'],
+            #"crisis_1": ['2018-10-04','2018-11-16'],
+            #"crisis_2": ['2020-03-06','2020-04-01'],
           }
 
 #PERIODS: {
@@ -38,7 +38,7 @@ END_TRAIN: '2020-01-01'
 #SCENARIOS: ['sideway', 'uptrend_1', 'downtrend', 'uptrend_2', 'crisis_1', 'crisis_2']
 
 #AGENTS: ['ddpg','sac','td3','a2c','ppo']
-AGENTS: ['sac']
+AGENTS: ['ddpg']
 
 
 ERL_PARAMS: {"learning_rate": 0.0003 ,"batch_size": 4096, "gamma":  0.985,
@@ -50,9 +50,9 @@ SB3_PARAMS: {"learning_rate": 0.003, "buffer_size": 1000000, "batch_size": 4096,
 
 BREAK_STEP : 100000
 
-RESULT_FOLDER: './Results/Backtesting/'
+RESULT_FOLDER: './Results/RLlib_2year_max_stock_30000/'
 
-TRAINED_MODEL_FOLDER: './TrainedModels/Backtesting/'
+TRAINED_MODEL_FOLDER: './TrainedModels/RLlib_2year_max_stock_100/'
 
 TECHNICAL_INDICATORS_LIST: ['macd', 'boll_ub', 'boll_lb', 'rsi_30', 'cci_30', 'dx_30', 'close_30_sma', 'close_60_sma']
 

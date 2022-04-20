@@ -1,4 +1,5 @@
 from distutils.command import config
+import re
 import numpy as np
 import os
 import gym
@@ -94,7 +95,8 @@ class StockTradingEnv(gym.Env):
         self.stocks_cd += 1
         trading_cost = 0
         if self.turbulence_bool[self.day] == 0:
-            min_action = int(self.max_stock * self.min_stock_rate)  # stock_cd
+            #min_action = int(self.max_stock * self.min_stock_rate)  # stock_cd
+            min_action = 0
             for index in np.where(actions < -min_action)[0]:  # sell_index:
                 if price[index] > 0:  # Sell only if current asset is > 0
                     sell_num_shares = min(self.stocks[index], -actions[index])
@@ -106,13 +108,16 @@ class StockTradingEnv(gym.Env):
                     self.stocks_cd[index] = 0
             for index in np.where(actions > min_action)[0]:  # buy_index:
                 if price[index] > 0:  # Buy only if the price is > 0 (no missing data in this particular date)
-                    buy_num_shares = min(self.amount // price[index], actions[index])
+                    buy_num_shares = min(self.amount // (price[index]*(1+self.buy_cost_pct)), actions[index])
                     buy_num_shares = buy_num_shares - buy_num_shares % self.min_stock_batch
                     buy_sell_actions[index] = buy_num_shares
                     self.stocks[index] += buy_num_shares
-                    trading_cost += price[index] * buy_num_shares * self.sell_cost_pct # sell_cost
+                    trading_cost += price[index] * buy_num_shares * self.buy_cost_pct # buy_cost
                     self.amount -= price[index] * buy_num_shares * (1 + self.buy_cost_pct)
                     self.stocks_cd[index] = 0
+                    
+                    if self.amount < 0:
+                        raise Exception('Amount: {} < 0 Date: {}, index_stock: {}'.format(self.amount, self.day, index))
 
         else:  # sell all when turbulence
             self.amount += (self.stocks * price).sum() * (1 - self.sell_cost_pct)
