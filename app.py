@@ -62,6 +62,7 @@ def main(config):
         state, reward, done, sell_buy_actions, _ = env_instance.step(action)
         print(sell_buy_actions)
 
+        print("Trading")
 
         #Get current date_time
         now = datetime.now()
