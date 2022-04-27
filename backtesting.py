@@ -28,7 +28,7 @@ import os
 import gym
 
 from Utils.utils import read_yaml, df_to_array
-
+from Model.rllib import get_action
 
 def train(agent_name,config, train_data, t, total_trained_episode):
     env = StockTradingEnv
@@ -64,7 +64,7 @@ def test(agent_name,config, trade, total_trained_episode, initial_capital):
     return episode_total_assets, episode_sell_buy, rewards, action_values, \
             episode_total_assets[-1] # - initial_capital
 
-def saving_test_result(date_list, episode_total_assets, episode_sell_buy, agent_name, tic_list):
+def saving_test_result(config,date_list, episode_total_assets, episode_sell_buy, agent_name, tic_list):
     #date_list = pd.DataFrame(trade['date'].unique(), columns=['date'])
     account_value_erl = pd.DataFrame({'date':date_list['date'],'account_value':episode_total_assets[0:len(episode_total_assets)]})
     #action_values_pd = pd.DataFrame({'date':date_list['date'],'-1':action_values[:,0],'-0.5':action_values[:,1],'0':action_values[:,2],'0.5':action_values[:,3],'1':action_values[:,4]})
@@ -89,12 +89,13 @@ def saving_test_result(date_list, episode_total_assets, episode_sell_buy, agent_
         
     #Visulize the results
     result_folder = config["RESULT_FOLDER"]
-    visualize(config,result_folder, with_Baseline= False)
+    visualize(config,result_folder, with_Baseline= True)
 
     if config['VISUALIZE_TRADING_ACTION']:
          visualize_trading_action(date_list['date'][0], str(pd.to_datetime(date_list['date'].iloc[-1]) + pd.DateOffset(1)), "", config)
 
 def backtesting_rllib(config):
+
 
     for agent_name in config['AGENTS']:
         processed = pd.read_csv(config['DATA_PATH'])
@@ -133,20 +134,84 @@ def backtesting_rllib(config):
             train_data = processed.iloc[:num_train_day*num_tic,:]
 
 
-        saving_test_result(trade_date_list, total_episode_total_assets, total_episode_sell_buy, agent_name, trade['tic'].unique())
-        
+        saving_test_result(config, trade_date_list, total_episode_total_assets, total_episode_sell_buy, agent_name, trade['tic'].unique())
+
+def get_action_API(config):
+
+    processed = pd.read_csv(config['DATA_PATH'])
+    processed = processed.sort_values(['date','tic'])
+    train_data = data_split(processed, config['BEGIN_DAY'], config['END_TRAIN'])
+
+    env = StockTradingEnv
+
+    train_price_array, train_tech_array, train_turbulence_array = df_to_array(train_data, tech_indicator_list= config_finrl.TECHNICAL_INDICATORS_LIST, if_vix= True)
+    turbulence_bool = (train_turbulence_array > 99).astype(np.float32)
+    env_config = {
+            "price_array": train_price_array,
+            "tech_array": train_tech_array,
+            "turbulence_array": train_turbulence_array,
+            "if_train": False,
+        }
+    max_stock = 100,
+    initial_capital = 1000000
+    env_instance = env(config=env_config, max_stock = max_stock, initial_capital = initial_capital)
+    #state = env_instance.reset()
+    #print(state.shape)
+
+    print("train_price_array.shape: {}".format(train_price_array.shape))
+    print("train_tech_array.shape: {}".format(train_tech_array.shape))
+    print("train_turbulence_array.shape: {}".format(train_turbulence_array.shape))
+
+
+    agent_name = 'ddpg'
+    max_episode = max(os.listdir(config["TRAINED_MODEL_FOLDER"] + agent_name))
+    max_episode = int(max_episode.split('_')[-1])
+    agent_path= config["TRAINED_MODEL_FOLDER"] + agent_name + "/checkpoint_{}/checkpoint-{}".format("0"*(6-len(str(max_episode))) + str(max_episode), str(max_episode))
+
+    initial_stocks = np.zeros(34, dtype=np.float32)
+    state = get_state(initial_capital, initial_stocks, train_turbulence_array[-1], turbulence_bool[-1], train_price_array[-1], train_tech_array[-1])
+    print(get_action(agent_name,state, env,agent_path, train_price_array, train_tech_array, train_turbulence_array))
+
+
+    #state = get_state(initial_capital, initial_stocks, turbulence, turbulence_bool, price, tech)
+
+def get_state(amount, stocks, turbulence, turbulence_bool, price, tech):
+    # origin code: scale is the fator of 2 (2 ** -6, 2 ** -12), which is difficult to debug, thus, 
+    # I change this scale to factor of 1
+    amount = np.array(max(amount, 1e4) * (2 ** -12), dtype=np.float32)
+    scale = np.array(2 ** -6, dtype=np.float32)
+    #amount = np.array(max(self.amount, 1e4) * (10 ** -3), dtype=np.float32)
+    #scale = np.array(10 ** -1, dtype=np.float32)
+    # return np.hstack((amount,
+    #                   self.turbulence_ary[self.day],
+    #                   self.turbulence_bool[self.day],
+    #                   price * scale,
+    #                   self.stocks * scale,
+    #                   self.stocks_cd,
+    #                   self.tech_ary[self.day],
+    #                   ))  # state.astype(np.float32)
     
+    stocks_cd = np.zeros_like(stocks)
 
-
+    return np.hstack((amount,
+                        turbulence,
+                        turbulence_bool,
+                        price * scale,
+                        stocks * scale,
+                        stocks_cd,
+                        tech,
+                        ))
+        
 if __name__ == '__main__':
     config_path = "config.yaml"
     config = read_yaml(config_path)
-    if config['RLLIB'] == "elegantrl":
-        pass
-        #train_elegantrl(config)
-    #elif config['RLLIB'] == "stable_baselines":
-    #    train_stable_baselines(config)
-    elif config['RLLIB'] == "ray":
-        backtesting_rllib(config)
-    else:
-        raise ValueError("Please choose elegantrl or stable_baselines or ray")
+    # if config['RLLIB'] == "elegantrl":
+    #     pass
+    #     #train_elegantrl(config)
+    # #elif config['RLLIB'] == "stable_baselines":
+    # #    train_stable_baselines(config)
+    # elif config['RLLIB'] == "ray":
+    #     backtesting_rllib(config)
+    # else:
+    #     raise ValueError("Please choose elegantrl or stable_baselines or ray")
+    get_action_API(config)

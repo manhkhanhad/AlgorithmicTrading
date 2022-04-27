@@ -37,3 +37,6 @@ def df_to_array(df, tech_indicator_list, if_vix):
             )
     print("Successfully transformed into array")
     return price_array, tech_array, turbulence_array
+
+def update_realtime_data():
+    pass

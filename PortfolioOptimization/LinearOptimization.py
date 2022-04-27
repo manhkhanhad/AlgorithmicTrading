@@ -16,12 +16,13 @@ from utils import visualize_action
 from utils import read_yaml, convert_data_format, calculate_return, plot_observation_price
 
 
-def portpolio_optimization(data, num_tic, lambda_ = 1):
-    mean = np.mean(data, axis=0).round(decimals=3)
+def portpolio_optimization(data,totol_return, num_tic, lambda_ = 1):
+    #mean = np.mean(data, axis=0).round(decimals=3)
+    mean = totol_return
     risk = np.mean((data - mean))
-
-    lambda_ = lambda_ * (risk/np.mean(mean))
-    print("lambda_", lambda_)
+    print("mean:", mean, "mean return of all stock", np.mean(mean), "risk:", risk)
+    #lambda_ = lambda_ * (abs(risk/(np.mean(mean)) + 0.00001))
+    #print("lambda_", lambda_)
     #Defind LP parameters
     c = -opt.matrix((mean * lambda_- risk).astype(np.double))
     A = opt.matrix(1.0, (1, num_tic))
@@ -112,11 +113,12 @@ def main(config):
         trading_day = config["OBSERVATION_STEPS"] + t * config["WAIT_STEPS"]
         observation_data = data[trading_day - config["OBSERVATION_STEPS"] : trading_day ,:]
 
+        totol_return = (observation_data[-1,1:] - observation_data[0,1:]) / observation_data[0,1:]
         return_data = calculate_return(observation_data).round(decimals=3)
 
         date = data[trading_day-1,0]
         prices = data[trading_day-1,1:].reshape((num_tic,1))
-        portpolio_proportion = portpolio_optimization(return_data, num_tic, config['LAMBDA'])
+        portpolio_proportion = portpolio_optimization(return_data, totol_return, num_tic, config['LAMBDA'])
 
         print(portpolio_proportion)
         if config['SELL_ALL']:
@@ -136,12 +138,12 @@ def main(config):
 
         print("Date:", date, "Cash:", cash, "Stock:", stock, "Action:", action)
         print("-----------------------------------------------------")
-        actions.append((date, cash, stock, return_value[0,0], is_profit))
+        actions.append((date, cash, stock, return_value[0,0], is_profit, portfolio_value))
 
-    print("Final return value:", actions[-1][-2])
+    print("Final return value:", actions[-1][-3])
     print("Trading fee:", total_trading_fee)
     visualize_action(data_raw, actions, config)
-    return actions[-1][-2] #return return_value
+    return actions[-1][-3] #return return_value
 
 def tuning(config):
     tune_config = {
@@ -163,7 +165,7 @@ def tuning(config):
         "return_value": []
     }
 
-    for lamda in np.arange(0,5,0.5):
+    for lamda in np.arange(0,1,0.05):
         for observation_step in np.arange(30, 360, 30):
             for wait_step in np.arange(10, 90, 10):
                 tune_config["LAMBDA"] = lamda
@@ -182,5 +184,10 @@ def tuning(config):
 if __name__ == '__main__':
     config_path = "config_LP.yaml"
     config = read_yaml(config_path)
-    main(config)
-    #tuning(config)
+    if config['MODE'] == "test":
+        main(config)
+    elif config['MODE'] == "tuning":
+        print("Tuning...")
+        tuning(config)
+    else:
+        raise ValueError("Invalid mode")

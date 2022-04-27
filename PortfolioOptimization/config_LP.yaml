@@ -1,13 +1,22 @@
-START_DAY: '2018-03-01'
-END_DAY: '2020-03-01'
+#Downtrend
+# START_DAY: '2018-03-01'
+# END_DAY: '2020-03-01'
 
-OBSERVATION_STEPS: 240
-WAIT_STEPS: 70
+#Sideway
+START_DAY: '2014-10-01'
+END_DAY: '2016-03-01'
+
+#Uptrend
+# START_DAY: '2020-03-01'
+# END_DAY: '2022-04-13'
+
+OBSERVATION_STEPS: 90
+WAIT_STEPS: 60
 
 DATA_PATH: "/mmlabworkspace/WorkSpaces/danhnt/tuyensh/khanhngo/AlgorithmicTrading/Data/VN_stock_adjusted.csv"
 
 INIT_CASH: 1000000
-LAMBDA: 2
+LAMBDA: 4
 
 SELL_ALL: True
 #Sell all == True means that the algorithm will sell all the stocks at the end of 
@@ -15,3 +24,5 @@ SELL_ALL: True
 #Sell all == False means that the algorithm will sell and buy to sastify the new portfolio proportion (minimize the trading cost)
 
 SAVE_DIR: "Results"
+
+MODE: "tuning"
