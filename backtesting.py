@@ -16,7 +16,7 @@ from Model.rllib import DRLAgent as DRLAgent_rllib
 
 from finrl.finrl_meta.preprocessor.preprocessors import FeatureEngineer, data_split
 from finrl.finrl_meta.data_processor import DataProcessor
-from Model.enviroment import StockTradingEnv
+from Model.enviroment import StockTradingEnv, VNStockEnv
 from Utils.visualize import visualize, visualize_trading_action
 from finrl.plot import backtest_stats, backtest_plot, get_daily_return, get_baseline
 from pprint import pprint
@@ -28,10 +28,10 @@ import os
 import gym
 
 from Utils.utils import read_yaml, df_to_array
-from Model.rllib import get_action
+#from Model.rllib import get_action
 
 def train(agent_name,config, train_data, t, total_trained_episode):
-    env = StockTradingEnv
+    env = VNStockEnv
 
     train_price_array, train_tech_array, train_turbulence_array = df_to_array(train_data, tech_indicator_list= config_finrl.TECHNICAL_INDICATORS_LIST, if_vix= True)
     
@@ -57,7 +57,7 @@ def train(agent_name,config, train_data, t, total_trained_episode):
     return total_trained_episode + train_episode
 def test(agent_name,config, trade, total_trained_episode, initial_capital):
     test_price_array, test_tech_array, test_turbulence_array = df_to_array(trade, tech_indicator_list= config['TECHNICAL_INDICATORS_LIST'], if_vix= True)
-    env = StockTradingEnv
+    env = VNStockEnv
     agent_path= config["TRAINED_MODEL_FOLDER"] + agent_name + "/checkpoint_{}/checkpoint-{}".format("0"*(6-len(str(total_trained_episode))) + str(total_trained_episode), str(total_trained_episode))
     print("agent_path: {}".format(agent_path))
     episode_total_assets, episode_sell_buy, rewards, action_values = DRLAgent_rllib.DRL_prediction(agent_name,env, test_price_array, test_tech_array, test_turbulence_array, agent_path, config['MAX_STOCK'],initial_capital)
@@ -142,7 +142,7 @@ def get_action_API(config):
     processed = processed.sort_values(['date','tic'])
     train_data = data_split(processed, config['BEGIN_DAY'], config['END_TRAIN'])
 
-    env = StockTradingEnv
+    env = VNStockEnv
 
     train_price_array, train_tech_array, train_turbulence_array = df_to_array(train_data, tech_indicator_list= config_finrl.TECHNICAL_INDICATORS_LIST, if_vix= True)
     turbulence_bool = (train_turbulence_array > 99).astype(np.float32)
@@ -205,13 +205,13 @@ def get_state(amount, stocks, turbulence, turbulence_bool, price, tech):
 if __name__ == '__main__':
     config_path = "config.yaml"
     config = read_yaml(config_path)
-    # if config['RLLIB'] == "elegantrl":
-    #     pass
-    #     #train_elegantrl(config)
-    # #elif config['RLLIB'] == "stable_baselines":
-    # #    train_stable_baselines(config)
-    # elif config['RLLIB'] == "ray":
-    #     backtesting_rllib(config)
-    # else:
-    #     raise ValueError("Please choose elegantrl or stable_baselines or ray")
-    get_action_API(config)
+    if config['RLLIB'] == "elegantrl":
+        pass
+        #train_elegantrl(config)
+    #elif config['RLLIB'] == "stable_baselines":
+    #    train_stable_baselines(config)
+    elif config['RLLIB'] == "ray":
+        backtesting_rllib(config)
+    else:
+        raise ValueError("Please choose elegantrl or stable_baselines or ray")
+    #get_action_API(config)
