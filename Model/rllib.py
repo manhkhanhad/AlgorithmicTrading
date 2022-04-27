@@ -190,8 +190,114 @@ class DRLAgent:
             sell_buy_actions = np.expand_dims(np.array(sell_buy_actions),axis=0)
             episode_sell_buy = np.concatenate([episode_sell_buy, sell_buy_actions], axis = 0)
         ray.shutdown()
+        
         print("episode_sell_buy :", episode_sell_buy.shape)
         
         print("episode return: " + str(episode_return))
         print("Test Finished!")
         return episode_total_assets, episode_sell_buy, rewards, None
+    
+# def get_action(model_name,state,
+#                 env,
+#                 agent_path,
+#                 price_array,
+#                 tech_array,
+#                 turbulence_array,
+#                 ):
+#     if model_name not in MODELS:
+#         raise NotImplementedError("NotImplementedError")
+
+#     if model_name == "a2c":
+#         model_config = MODELS[model_name].A2C_DEFAULT_CONFIG.copy()
+#     elif model_name == "td3":
+#         model_config = MODELS[model_name].TD3_DEFAULT_CONFIG.copy()
+#     else:
+#         model_config = MODELS[model_name].DEFAULT_CONFIG.copy()
+#     model_config["env"] = env
+#     model_config["log_level"] = "WARN"
+#     model_config["env_config"] = {
+#             "price_array": price_array,
+#             "tech_array": tech_array,
+#             "turbulence_array": turbulence_array,
+#             "if_train": False,
+#         }
+#     env_config = {
+#         "price_array": price_array,
+#         "tech_array": tech_array,
+#         "turbulence_array": turbulence_array,
+#         "if_train": False,
+#     }
+#     # env_instance = env(config=env_config, max_stock = max_stock, initial_capital = initial_capital)
+
+#     # ray.init() # Other Ray APIs will not work until `ray.init()` is called.
+#     if model_name == "ppo":
+#         trainer = MODELS[model_name].PPOTrainer(env=env, config=model_config)
+#     elif model_name == "a2c":
+#         trainer = MODELS[model_name].A2CTrainer(env=env, config=model_config)
+#     elif model_name == "ddpg":
+#         trainer = MODELS[model_name].DDPGTrainer()
+#     elif model_name == "td3":
+#         trainer = MODELS[model_name].TD3Trainer(env=env, config=model_config)
+#     elif model_name == "sac":
+#         trainer = MODELS[model_name].SACTrainer(env=env, config=model_config)
+
+#     try:
+#         trainer.restore(agent_path)
+#         print("Restoring from checkpoint path", agent_path)
+#     except BaseException:
+#         raise ValueError("Fail to load agent!")
+
+#     action = trainer.compute_single_action(state)
+#     return action
+
+def get_trained_agent(model_name,
+                env,
+                agent_path,
+                price_array,
+                tech_array,
+                turbulence_array,
+                ):
+    if model_name not in MODELS:
+        raise NotImplementedError("NotImplementedError")
+
+    if model_name == "a2c":
+        model_config = MODELS[model_name].A2C_DEFAULT_CONFIG.copy()
+    elif model_name == "td3":
+        model_config = MODELS[model_name].TD3_DEFAULT_CONFIG.copy()
+    else:
+        model_config = MODELS[model_name].DEFAULT_CONFIG.copy()
+    model_config["env"] = env
+    model_config["log_level"] = "WARN"
+    model_config["env_config"] = {
+            "price_array": price_array,
+            "tech_array": tech_array,
+            "turbulence_array": turbulence_array,
+            "if_train": False,
+        }
+    env_config = {
+        "price_array": price_array,
+        "tech_array": tech_array,
+        "turbulence_array": turbulence_array,
+        "if_train": False,
+    }
+    # env_instance = env(config=env_config, max_stock = max_stock, initial_capital = initial_capital)
+
+    # ray.init() # Other Ray APIs will not work until `ray.init()` is called.
+    if model_name == "ppo":
+        trainer = MODELS[model_name].PPOTrainer(env=env, config=model_config)
+    elif model_name == "a2c":
+        trainer = MODELS[model_name].A2CTrainer(env=env, config=model_config)
+    elif model_name == "ddpg":
+        trainer = MODELS[model_name].DDPGTrainer(env=env, config=model_config)
+    elif model_name == "td3":
+        trainer = MODELS[model_name].TD3Trainer(env=env, config=model_config)
+    elif model_name == "sac":
+        trainer = MODELS[model_name].SACTrainer(env=env, config=model_config)
+
+    try:
+        trainer.restore(agent_path)
+        print("Restoring from checkpoint path", agent_path)
+    except BaseException:
+        raise ValueError("Fail to load agent!")
+
+    return trainer

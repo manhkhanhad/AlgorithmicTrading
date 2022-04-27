@@ -4,6 +4,9 @@ from datetime import datetime
 import requests
 import pandas as pd
 import argparse
+import pandas as pd
+import os
+from finrl.finrl_meta.preprocessor.preprocessors import FeatureEngineer
 
 class DataDowloader:
     """
@@ -86,3 +89,76 @@ if __name__=="__main__":
     dowloader = DataDowloader(args)
     dowloader.download()
     dowloader.process()
+
+
+class CoPhieu68_DataProcessor:
+    def __init__(self, data_dir, save_path, indicator):
+        """
+        Args:
+            data_dir: str 
+                directory that contain data downloaded from CoPhieu68
+            save_path: str
+                path to save processed data
+            indicator: list
+                list of indicator to caculate
+        """
+        self.data_dir = data_dir
+        self.save_path = save_path
+        self.indicator = indicator
+    def download(self):
+        """
+        Download data from internet
+        """
+        pass
+    def download_VNINDEX(self):
+        """
+        Download VNINDEX data and processing
+        """
+        VNIndex = pd.read_csv("/content/VNIndex.csv")
+        VNIndex.columns = ['date','close','open','high','low','volumn','change']
+        VNIndex['date'] = pd.DatetimeIndex(VNIndex['date'])
+        VNIndex['date'] = pd.to_datetime(VNIndex['date'], format='%Y%m%d')
+        VNIndex['date'] = VNIndex['date'].apply(lambda x: x.strftime('%Y-%m-%d'))
+
+        for col in ['close','open','high','low']:
+            VNIndex[col] = VNIndex[col].str.replace(',','').astype(np.float64)
+            VNIndex[col] = VNIndex[col].apply(pd.to_numeric)
+
+        VNIndex = VNIndex.sort_values(['date'])
+        VNIndex.to_csv("VNIndex_test.csv")
+
+    def process(self):
+        """
+        Process data and save to csv
+        """
+        # Read and merge data to a Dataframe
+        for f in os.listdir(self.data_dir):
+            tmp = pd.read_csv(os.path.join(self.data_dir, f))
+            tmp.columns = ['tic','date','open','high','low','close','volume']
+            tmp = tmp.assign(tic=f.split('_')[-1][:-4].upper())
+            data = pd.concat([data,tmp], ignore_index=True)
+
+        # Convert datetime format
+        data['date'] = pd.to_datetime(data['date'].astype(str), format='%Y%m%d')
+        data['date'] = data['date'].apply(lambda x: x.strftime('%Y-%m-%d'))
+
+        # Remove missing data
+        list_tics = list(pd.unique(data['tic']))
+        day_list = data[data.tic == list_tics[0]]['date']
+        for tic_name in list_tics[1:]:
+            day_list = pd.Series(list(set(day_list).intersection(set(data[data["tic"] == tic_name]['date']))))
+
+        data = pd.merge(data, day_list.to_frame('date'), on = 'date')
+
+        #Calculate Indicator
+
+        fe = FeatureEngineer(
+                            use_technical_indicator=True,
+                            tech_indicator_list = self.indicator,
+                            use_vix=True,
+                            use_turbulence=True,
+                            user_defined_feature = False)
+
+        processed = fe.preprocess_data(data)
+
+        processed.to_csv(self.save_path)

@@ -127,7 +127,7 @@ def test_rllib(config):
         
     #Visulize the results
         result_folder = config["RESULT_FOLDER"] + '/' + scenario
-        visualize(config,result_folder, with_Baseline= False)
+        visualize(config,result_folder, with_Baseline= True)
 
         if config['VISUALIZE_TRADING_ACTION']:
             visualize_trading_action(begin_trade, end_trade,scenario,config)

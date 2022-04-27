@@ -37,9 +37,7 @@ END_TRAIN: '2020-01-01'
 #SCENARIOS: ['crisis_1', 'crisis_2'] #['sideway'] 
 #SCENARIOS: ['sideway', 'uptrend_1', 'downtrend', 'uptrend_2', 'crisis_1', 'crisis_2']
 
-#AGENTS: ['ddpg','sac','td3','a2c','ppo']
-AGENTS: ['ddpg']
-
+AGENTS: ['ddpg','sac','td3','a2c','ppo']
 
 ERL_PARAMS: {"learning_rate": 0.0003 ,"batch_size": 4096, "gamma":  0.985,
             "seed": 312,"net_dimension": 512, "target_step": 100000, "eval_gap": 60,
@@ -50,9 +48,9 @@ SB3_PARAMS: {"learning_rate": 0.003, "buffer_size": 1000000, "batch_size": 4096,
 
 BREAK_STEP : 100000
 
-RESULT_FOLDER: './Results/RLlib_2year_max_stock_30000/'
+RESULT_FOLDER: './Results/Backtesting_2104/'
 
-TRAINED_MODEL_FOLDER: './TrainedModels/RLlib_2year_max_stock_100/'
+TRAINED_MODEL_FOLDER: './TrainedModels/Backtesting_2104/'
 
 TECHNICAL_INDICATORS_LIST: ['macd', 'boll_ub', 'boll_lb', 'rsi_30', 'cci_30', 'dx_30', 'close_30_sma', 'close_60_sma']
 
