@@ -1,6 +1,8 @@
 <h1 align="center">MMLab Trading: An Algorithmic Trading Framework</h1>
 
+<p align="center">
 **MMLab Trading is still in Beta, meaning it should be used very cautiously if used in production, as it may contain bugs.**
+</p>
 
 <p align="center">
   <img width="400" align="center" src="Image/white_logo.png" alt="Logo MMLab"/>
