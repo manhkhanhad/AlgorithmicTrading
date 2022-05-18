@@ -1,0 +1,10 @@
+numpy
+pandas
+stockstats
+elegantrl
+matplotlib
+scikit-learn
+gym
+ccxt
+plotly
+ray
