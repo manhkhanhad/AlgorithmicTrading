@@ -4,7 +4,7 @@ sys.path.append("../AlgorithmicTrading/")
 from Utils.utils import read_yaml, df_to_array
 from finrl.finrl_meta.preprocessor.preprocessors import data_split
 import pandas as pd
-from Model.enviroment import StockTradingEnv
+from Model.enviroment import StockTradingEnv, VNStockEnv
 
 config_path = "config.yaml"
 config = read_yaml(config_path)
@@ -37,7 +37,7 @@ env_config = {'price_array':price_array,
                 'initial_stocks': initial_stocks}
 
 
-env = StockTradingEnv
+env = VNStockEnv
 env_instance = env(config=env_config)
 print("buy cost:", env_instance.buy_cost_pct)
 print("sell cost:", env_instance.sell_cost_pct)
