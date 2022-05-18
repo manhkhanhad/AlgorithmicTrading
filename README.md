@@ -3,7 +3,7 @@
 **MMLab Trading is still in Beta, meaning it should be used very cautiously if used in production, as it may contain bugs.**
 
 <p align="center">
-  <img width="700" align="center" src="Image/white_logo.png" alt="Logo MMLab"/>
+  <img width="400" align="center" src="Image/white_logo.png" alt="Logo MMLab"/>
 </p>
 
 <p>
