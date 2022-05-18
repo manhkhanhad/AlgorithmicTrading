@@ -12,6 +12,7 @@
 </p>
 
 **MMLab Trading is still in Beta, meaning it should be used very cautiously if used in production, as it may contain bugs.**
+
 MMLab Trading is an open source Python framework apply reinforcement learning for automatic stock trading and Linear Programming for portflio optimization. 
 
 # 🔧 Install 
