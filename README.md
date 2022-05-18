@@ -1,5 +1,5 @@
 <h1 align="center">MMLab Trading: An Algorithmic Trading Framework</h1>
-
+**MMLab Trading is still in Beta, meaning it should be used very cautiously if used in production, as it may contain bugs.**
 <p align="center">
   <img width="700" align="center" src="demo/demo.gif" alt="Logo MMLab"/>
 </p>
@@ -11,7 +11,7 @@
   </a>
 </p>
 
-**MMLab Trading is still in Beta, meaning it should be used very cautiously if used in production, as it may contain bugs.**
+
 
 MMLab Trading is an open source Python framework apply reinforcement learning for automatic stock trading and Linear Programming for portflio optimization. 
 
