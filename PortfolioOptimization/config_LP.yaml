@@ -13,16 +13,29 @@ END_DAY: '2016-03-01'
 OBSERVATION_STEPS: 90
 WAIT_STEPS: 60
 
-DATA_PATH: "/mmlabworkspace/WorkSpaces/danhnt/tuyensh/khanhngo/AlgorithmicTrading/Data/VN_stock_adjusted.csv"
-
-INIT_CASH: 1000000
+DATA_DIR: "/mmlabworkspace/WorkSpaces/danhnt/tuyensh/khanhngo/AlgorithmicTrading/PortfolioOptimization/Data"
+#DATA_PATH: "/mmlabworkspace/WorkSpaces/danhnt/tuyensh/khanhngo/AlgorithmicTrading/Data/VN_stock_adjusted.csv"
+VNINDEX_PATH : "/mmlabworkspace/WorkSpaces/danhnt/tuyensh/khanhngo/AlgorithmicTrading/PortfolioOptimization/Data/excel_^vnindex.csv"
+INIT_CASH: 10000
 LAMBDA: 4
+
 
 SELL_ALL: True
 #Sell all == True means that the algorithm will sell all the stocks at the end of 
 #            period then buy according to the new portfolio proportion
 #Sell all == False means that the algorithm will sell and buy to sastify the new portfolio proportion (minimize the trading cost)
+BUY_FEE: 0.015
+SELL_FEE: 0.015
+NUM_DAY_PLOT: 600
 
 SAVE_DIR: "Results"
 
 MODE: "tuning"
+
+
+#Senario Classifier config
+TRAIN_CLASSIFIER: True
+OBSERVATION_DATE:  15 
+DAY_OF_INTEREST: 30  # Number of days to determine label
+CHECKPOINT_DIR: "/mmlabworkspace/WorkSpaces/danhnt/tuyensh/khanhngo/AlgorithmicTrading/PortfolioOptimization/checkpoint/"
+THRESHOLD: 0.5
