@@ -19,7 +19,7 @@ import os
 import tensorflow as tf
 
 from finrl.finrl_meta.preprocessor.preprocessors import FeatureEngineer
-from utils import read_yaml, convert_data_format, calculate_return, plot_observation_price
+from utils import read_yaml, convert_data_format, calculate_return, plot_observation_price, process_data
 from LinearOptimization import portpolio_optimization
 from SenarioClassification import SenarioClassifier
 
@@ -56,30 +56,6 @@ from SenarioClassification import SenarioClassifier
 #     else:
 #         print("Bad - Probability = ", (1-scores) * 100)
 #         return 0, (1-scores) * 100
-
-def process_data(data_dir):
-    data = None
-    for f in os.listdir(data_dir):
-        if f.find("dex") != -1:
-            continue
-        tmp = pd.read_csv(os.path.join(data_dir, f))
-        tmp.columns = ['tic','date','open','high','low','close','volume']
-        tmp = tmp.assign(tic=f.split('_')[-1][:-4].upper())
-        data = pd.concat([data,tmp], ignore_index=True)
-
-    # Convert datetime format
-    data['date'] = pd.to_datetime(data['date'].astype(str), format='%Y%m%d')
-    data['date'] = data['date'].apply(lambda x: x.strftime('%Y-%m-%d'))
-
-    # Remove missing data
-    list_tics = list(pd.unique(data['tic']))
-    day_list = data[data.tic == list_tics[0]]['date']
-    for tic_name in list_tics[1:]:
-        day_list = pd.Series(list(set(day_list).intersection(set(data[data["tic"] == tic_name]['date']))))
-
-    data = pd.merge(data, day_list.to_frame('date'), on = 'date')
-
-    return data
 
 def calculate_action(config):
     data = process_data(config["DATA_DIR"])

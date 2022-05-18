@@ -5,6 +5,7 @@ import os
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import plotly.express as px
+import pandas as pd
 
 def read_yaml(config_weight):
     try:
@@ -68,3 +69,28 @@ def visualize_action(data_raw, actions, config):
     #fig.show()
     fig.write_image(config['SAVE_DIR'] + '/action.png')
     fig.write_html(config['SAVE_DIR'] + '/action.html')
+
+
+def process_data(data_dir):
+    data = None
+    for f in os.listdir(data_dir):
+        if f.find("dex") != -1:
+            continue
+        tmp = pd.read_csv(os.path.join(data_dir, f))
+        tmp.columns = ['tic','date','open','high','low','close','volume']
+        tmp = tmp.assign(tic=f.split('_')[-1][:-4].upper())
+        data = pd.concat([data,tmp], ignore_index=True)
+
+    # Convert datetime format
+    data['date'] = pd.to_datetime(data['date'].astype(str), format='%Y%m%d')
+    data['date'] = data['date'].apply(lambda x: x.strftime('%Y-%m-%d'))
+
+    # Remove missing data
+    list_tics = list(pd.unique(data['tic']))
+    day_list = data[data.tic == list_tics[0]]['date']
+    for tic_name in list_tics[1:]:
+        day_list = pd.Series(list(set(day_list).intersection(set(data[data["tic"] == tic_name]['date']))))
+
+    data = pd.merge(data, day_list.to_frame('date'), on = 'date')
+
+    return data

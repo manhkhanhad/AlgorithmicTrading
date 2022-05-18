@@ -3,8 +3,8 @@
 # END_DAY: '2020-03-01'
 
 #Sideway
-START_DAY: '2014-10-01'
-END_DAY: '2016-03-01'
+START_DAY: '2018-03-01'
+END_DAY: '2020-03-01'
 
 #Uptrend
 # START_DAY: '2020-03-01'
@@ -17,7 +17,7 @@ DATA_DIR: "/mmlabworkspace/WorkSpaces/danhnt/tuyensh/khanhngo/AlgorithmicTrading
 #DATA_PATH: "/mmlabworkspace/WorkSpaces/danhnt/tuyensh/khanhngo/AlgorithmicTrading/Data/VN_stock_adjusted.csv"
 VNINDEX_PATH : "/mmlabworkspace/WorkSpaces/danhnt/tuyensh/khanhngo/AlgorithmicTrading/PortfolioOptimization/Data/excel_^vnindex.csv"
 INIT_CASH: 10000
-LAMBDA: 4
+LAMBDA: 3
 
 
 SELL_ALL: True
@@ -30,7 +30,7 @@ NUM_DAY_PLOT: 600
 
 SAVE_DIR: "Results"
 
-MODE: "tuning"
+MODE: "test"
 
 
 #Senario Classifier config

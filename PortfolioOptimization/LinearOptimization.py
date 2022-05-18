@@ -13,7 +13,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from utils import visualize_action
 
-from utils import read_yaml, convert_data_format, calculate_return, plot_observation_price
+from utils import read_yaml, convert_data_format, calculate_return, plot_observation_price, process_data
 
 
 def portpolio_optimization(data,totol_return, num_tic, lambda_ = 1):
@@ -98,9 +98,15 @@ def main(config):
     # print(portpolio)
 
     #Load data
-    data_raw = pd.read_csv(config['DATA_PATH'])
+    # data_raw = pd.read_csv(config['DATA_PATH'])
+    # data = data_raw[(data_raw.date >= config['START_DAY']) & (data_raw.date <= config['END_DAY'])]
+    # data = convert_data_format(data)
+
+    data_raw = process_data(config["DATA_DIR"])
+    #data_raw = pd.read_csv(config['DATA_PATH'])
     data = data_raw[(data_raw.date >= config['START_DAY']) & (data_raw.date <= config['END_DAY'])]
     data = convert_data_format(data)
+
     num_days,num_tic = data.shape[0], (data.shape[1] - 1) #minus 1 because of we don't need date column
 
     total_trading_fee = 0
