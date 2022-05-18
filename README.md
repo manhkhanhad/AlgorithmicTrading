@@ -21,6 +21,15 @@ MMLab Trading is an open source Python framework apply reinforcement learning fo
 
 # 🔧 Install 
 
+1. Clone repository:
+```
+git clone https://github.com/manhkhanhad/AlgorithmicTrading
+```
+2. Install dependency
+```
+pip install -r requirement.txt
+```
+
 # ✨ Getting Started
 ## Portfolio Optimization
 1. Download stock historical prices and Market Index (i.e VNIndex) into `Data` folder
